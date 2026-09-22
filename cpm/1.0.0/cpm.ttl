@@ -11,10 +11,7 @@ cpm: a owl:Ontology ;
     dct:title "Common Provenance Model Ontology (CPM-O)"@en ;
     dct:description "The normative OWL 2 ontology representing the Common Provenance Model (CPM). It is designed to support the traceability of samples and data in multi-organizational environments, as defined by the Common Provenance Framework (CPF)."@en ;
     dct:abstract "The Common Provenance Model (CPM) ontology provides a formal, machine-actionable vocabulary for tracking the provenance of samples and data in multi-organizational environments."@en ;
-    dct:creator "Rudolf Wittner" ;
-    dct:creator "Matus Formanek" ;    
-    dct:creator "Stanislav Prikryl" ;
-        dct:contributor "Rudolf Wittner" ;
+    dct:contributor "Rudolf Wittner" ;
     dct:contributor "Cecilia Mascia" ;
     dct:contributor "Matej Gallo" ;
     dct:contributor "Francesca Frexia" ;
@@ -23,13 +20,11 @@ cpm: a owl:Ontology ;
     dct:contributor "Jörg Geiger" ;
     dct:contributor "Petr Holub" ;
     dct:created "2026-02-05"^^xsd:date ;
-    dct:modified "2026-09-15"^^xsd:date ;
-    dct:source <https://doi.org/10.5281/zenodo.19889324> ;
     dct:license <http://creativecommons.org/licenses/by/4.0/> ;
     vann:preferredNamespacePrefix "cpm" ;
     vann:preferredNamespaceUri "https://www.commonprovenancemodel.org/cpm#" ;
-    rdfs:seeAlso <https://www.commonprovenancemodel.org/> ,
-                 <https://github.com/Common-Provenance-Framework> ;
+    rdfs:seeAlso <https://github.com/Common-Provenance-Framework> ,
+                 <https://doi.org/10.5281/zenodo.19889324> ;
     owl:versionIRI <https://www.commonprovenancemodel.org/cpm/1.0.0/cpm.ttl> ;
     owl:versionInfo "1.0.0"@en .
 
@@ -312,12 +307,12 @@ cpm:senderAgent a owl:NamedIndividual,
     rdfs:label "Sender Agent Role"@en ;
     rdfs:comment "CPM type value representing a sender agent."@en .
 
-cpm:externalId rdfs:domain [ 
+cpm:externalId rdfs:domain [
     a owl:Class ;
-    owl:unionOf ( prov:Entity prov:Activity prov:Agent ) 
+    owl:unionOf ( prov:Entity prov:Activity prov:Agent )
 ] .
 
-cpm:externalIdType rdfs:domain [ 
+cpm:externalIdType rdfs:domain [
     a owl:Class ;
-    owl:unionOf ( prov:Entity prov:Activity prov:Agent ) 
+    owl:unionOf ( prov:Entity prov:Activity prov:Agent )
 ] .
