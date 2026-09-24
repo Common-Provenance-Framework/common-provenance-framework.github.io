@@ -7,20 +7,27 @@
 @base <https://www.commonprovenancemodel.org/cpm#> .
 
 <https://www.commonprovenancemodel.org/cpm#> rdf:type owl:Ontology ;
-                                              owl:versionIRI <https://www.commonprovenancemodel.org/cpm/1.0.0/cpm.ttl> ;
-                                              <http://purl.org/dc/terms/abstract> "The Common Provenance Model (CPM) ontology provides a formal, machine-actionable vocabulary for tracking the provenance of samples and data in multi-organizational environments."@en ;
-                                              <http://purl.org/dc/terms/contributor> "RNDr. Rudolf Wittner" ;
+                                              owl:versionIRI <https://www.commonprovenancemodel.org/cpm/1.0.0> ;
+                                              owl:imports <http://www.w3.org/ns/prov-o-20130430> ;
+                                              <http://purl.org/dc/terms/abstract> "The Common Provenance Model Ontology (CPM-O) expresses the Common Provenance Model (CPM) using the OWL2 Web Ontology Language (OWL2). It provides a set of classes and properties that can be used to represent and interchange provenance information generated in different systems and under different contexts. It can also be specialized to create new classes and properties to model provenance information for different applications and domains. CPM-O and CPM are part of the Common Provenance Framework (CPF). CPM-O is an extension of PROV-O."@en ;
+                                              <http://purl.org/dc/terms/contributor> "Cecilia Mascia" ,
+                                                                                     "Francesca Frexia" ,
+                                                                                     "Heimo Müller" ,
+                                                                                     "Jörg Geiger" ,
+                                                                                     "Markus Plass" ,
+                                                                                     "Matej Gallo" ,
+                                                                                     "Petr Holub" ,
+                                                                                     "Rudolf Wittner" ;
                                               <http://purl.org/dc/terms/created> "2026-02-05"^^xsd:date ;
-                                              <http://purl.org/dc/terms/creator> "Bc. Stanislav Prikryl"@en ;
-                                              <http://purl.org/dc/terms/description> "The normative OWL 2 ontology representing the Common Provenance Model (CPM). It is designed to support the traceability of samples and data in multi-organizational environments, as defined by the Common Provenance Framework (CPF)."@en ;
+                                              <http://purl.org/dc/terms/description> "CPM-O provides IRIs, labels and definitions for the terms of the Common Provenance Model (ISO 23494-2), so that these terms can be referenced from provenance documents expressed in PROV-N, PROV-JSON, PROV-XML or RDF. In this version the ontology serves primarily as a vocabulary: it declares the CPM classes and attributes and aligns them with PROV-O. The minimum cardinality restrictions it contains document requirements of ISO 23494-2 but, under the open-world semantics of OWL, they do not validate data. Constraints for checking conformance to ISO 23494-2 (e.g. exact cardinalities) and further features are planned for future versions."@en ;
                                               <http://purl.org/dc/terms/license> <http://creativecommons.org/licenses/by/4.0/> ;
-                                              <http://purl.org/dc/terms/modified> "2026-09-15"^^xsd:date ;
-                                              <http://purl.org/dc/terms/source> <https://doi.org/10.5281/zenodo.19889324> ;
                                               <http://purl.org/dc/terms/title> "Common Provenance Model Ontology (CPM-O)"@en ;
                                               <http://purl.org/vocab/vann/preferredNamespacePrefix> "cpm" ;
                                               <http://purl.org/vocab/vann/preferredNamespaceUri> "https://www.commonprovenancemodel.org/cpm#" ;
-                                              rdfs:seeAlso <https://github.com/Common-Provenance-Framework> ,
-                                                           <https://www.commonprovenancemodel.org/> ;
+                                              rdfs:comment "Following PROV-O (Section 3.1), the PROV-DM attribute prov:type is expressed in RDF with rdf:type; CPM-O therefore does not declare prov:type. PROV-N, PROV-JSON and PROV-XML keep prov:type unchanged, e.g. prov:type='cpm:backwardConnector'. Each CPM type value (e.g. cpm:backwardConnector) is declared as a class equivalent to the corresponding CPM-O class (e.g. cpm:BackwardConnector), so RDF produced from PROV-N/PROV-JSON by standard PROV tooling is classified correctly. New RDF should use the capitalized class names."@en ;
+                                              rdfs:seeAlso <https://doi.org/10.5281/zenodo.19889324> ,
+                                                           <https://github.com/Common-Provenance-Framework> ,
+                                                           <https://www.commonprovenancemodel.org/PLACEHOLDER-known-issues> ;
                                               owl:versionInfo "1.0.0"@en .
 
 #################################################################
@@ -39,24 +46,12 @@
 <http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
 
 
-###  http://purl.org/dc/terms/creator
-<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
-
-
 ###  http://purl.org/dc/terms/description
 <http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/license
 <http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/modified
-<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/source
-<http://purl.org/dc/terms/source> rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/title
@@ -71,22 +66,16 @@
 <http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
 
 
+###  http://purl.org/vocab/vann/usageNote
+<http://purl.org/vocab/vann/usageNote> rdf:type owl:AnnotationProperty .
+
+
 #################################################################
 #    Datatypes
 #################################################################
 
 ###  http://www.w3.org/2001/XMLSchema#date
 xsd:date rdf:type rdfs:Datatype .
-
-
-#################################################################
-#    Object Properties
-#################################################################
-
-###  http://www.w3.org/ns/prov#type
-<http://www.w3.org/ns/prov#type> rdf:type owl:ObjectProperty ;
-                                 rdfs:comment "A standard PROV property to define the type of a provenance entity."@en ;
-                                 rdfs:label "type"@en .
 
 
 #################################################################
@@ -101,8 +90,13 @@ xsd:date rdf:type rdfs:Datatype .
                                      <http://www.w3.org/ns/prov#Entity>
                                    )
                      ] ;
-         rdfs:range xsd:string ;
-         rdfs:comment "Arbitrary comment or additional information."@en ;
+         rdfs:range [ rdf:type rdfs:Datatype ;
+                      owl:unionOf ( rdf:langString
+                                    xsd:string
+                                  )
+                    ] ;
+         rdfs:comment "arbitrary comment or additional information."@en ;
+         rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
          rdfs:label "comment"@en .
 
 
@@ -110,15 +104,17 @@ xsd:date rdf:type rdfs:Datatype .
 :contactIdPid rdf:type owl:DatatypeProperty ;
               rdfs:domain <http://www.w3.org/ns/prov#Agent> ;
               rdfs:range xsd:anyURI ;
-              rdfs:comment "A resolvable persistent identifier dereferencing to actual contact information (e.g. email address) that can be used to contact a person or organization represented by a particular agent. The value of this attribute is a persistent identifier, thus it has the form of a qualified name."@en ;
-              rdfs:label "contactPID"@en .
+              rdfs:comment "a resolvable persistent identifier dereferencing to actual contact information (e.g. email address) that can be used to contact a person or organization represented by a particular agent. The value of this attribute is the full IRI of the persistent identifier, given as a literal of type xsd:anyURI."@en ;
+              rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+              rdfs:label "contactIdPid"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#describedObjectType
 :describedObjectType rdf:type owl:DatatypeProperty ;
                      rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
                      rdfs:range xsd:string ;
-                     rdfs:comment "Type of the object represented by the PROV entity"@en ;
+                     rdfs:comment "type of the object represented by the PROV entity"@en ;
+                     rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                      rdfs:label "describedObjectType"@en .
 
 
@@ -131,8 +127,9 @@ xsd:date rdf:type rdfs:Datatype .
                                       )
                         ] ;
             rdfs:range xsd:string ;
-            rdfs:comment "External identifier of a described object or a described activity, which is represented by a PROV entity, PROV activity or PROV agent."@en ;
-            rdfs:label "externalID"@en .
+            rdfs:comment "external identifier of a described object or a described activity, which is represented by a PROV entity, PROV activity or PROV agent."@en ;
+            rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+            rdfs:label "externalId"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#externalIdType
@@ -144,31 +141,36 @@ xsd:date rdf:type rdfs:Datatype .
                                           )
                             ] ;
                 rdfs:range xsd:string ;
-                rdfs:comment "Type of the external identifier"@en ;
-                rdfs:label "externalID type"@en .
+                rdfs:comment "type of the external identifier"@en ;
+                rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                rdfs:label "externalIdType"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#hasId
 :hasId rdf:type owl:DatatypeProperty ;
        rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
        rdfs:range xsd:boolean ;
-       rdfs:comment "An indication whether the PROV entity having this attribute has an external identifier expressed as a standalone entity"@en ;
-       rdfs:label "hasID"@en .
+       rdfs:comment "an indication whether the PROV entity having this attribute has an external identifier expressed as a standalone entity"@en ;
+       rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+       rdfs:label "hasId"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#hashAlg
 :hashAlg rdf:type owl:DatatypeProperty ;
          rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
          rdfs:range xsd:string ;
-         rdfs:comment "Algorithm used to create a hashValue"@en ;
-         rdfs:label "hashAlgorithm"@en .
+         rdfs:comment "algorithm used to create a hashValue"@en ;
+         rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+         rdfs:label "hashAlg"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#hashValue
 :hashValue rdf:type owl:DatatypeProperty ;
            rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
            rdfs:range xsd:string ;
-           rdfs:comment "A hash value of a described object, which is represented by the PROV entity, presuming that the described object is a digital object and not a physical object. It is always used together with cpm:hashAlg."@en ;
+           <http://purl.org/vocab/vann/usageNote> "It is always used together with cpm:hashAlg."@en ;
+           rdfs:comment "a hash value of a described object, which is represented by the PROV entity, presuming that the described object is a digital object and not a physical object."@en ;
+           rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
            rdfs:label "hashValue"@en .
 
 
@@ -181,7 +183,8 @@ xsd:date rdf:type rdfs:Datatype .
                                   ] ;
                       rdfs:range xsd:anyURI ;
                       rdfs:comment "URI of a service where a finalized provenance component can be requested using its identifier"@en ;
-                      rdfs:label "provenanceServiceURI"@en .
+                      rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                      rdfs:label "provenanceServiceUri"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#referencedBundleHashValue
@@ -192,7 +195,8 @@ xsd:date rdf:type rdfs:Datatype .
                                                      )
                                        ] ;
                            rdfs:range xsd:string ;
-                           rdfs:comment "A hash value of a provenance component referenced by the connector in which the attribute is present"@en ;
+                           rdfs:comment "a hash value of a provenance component referenced by the connector in which the attribute is present"@en ;
+                           rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                            rdfs:label "referencedBundleHashValue"@en .
 
 
@@ -204,8 +208,9 @@ xsd:date rdf:type rdfs:Datatype .
                                               )
                                 ] ;
                     rdfs:range xsd:anyURI ;
-                    rdfs:comment "Identifier of a finalized provenance component referenced by the connector that contains this attribute"@en ;
-                    rdfs:label "referencedBundleID"@en .
+                    rdfs:comment "identifier of a finalized provenance component referenced by the connector that contains this attribute"@en ;
+                    rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                    rdfs:label "referencedBundleId"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#referencedBundleSpecV
@@ -216,8 +221,10 @@ xsd:date rdf:type rdfs:Datatype .
                                                  )
                                    ] ;
                        rdfs:range xsd:string ;
-                       rdfs:comment "Specification of the CPM version that is used to represent the content of the referenced finalized provenance component. Used together with the cpm:referencedBundleId attribute. A value specifying an ISO document has the format ISO-[DOC_TYPE]-[PROJECT-CODE]-[PART]:[YEAR-OF-PUBLICATION], where DOC_TYPE is IS, TS or PAS, e.g. ISO-IS-23494-2:2026."@en ;
-                       rdfs:label "referencedBundleSpecificationVersion"@en .
+                       <http://purl.org/vocab/vann/usageNote> "A value specifying an ISO document has the format ISO-[DOC_TYPE]-[PROJECT-CODE]-[PART]:[YEAR-OF-PUBLICATION], where DOC_TYPE is IS, TS or PAS, e.g. ISO-IS-23494-2:2026."@en ;
+                       rdfs:comment "specification of the CPM version that is used to represent the content of the referenced finalized provenance component. Used together with the cpm:referencedBundleId attribute."@en ;
+                       rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                       rdfs:label "referencedBundleSpecV"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#referencedMetaBundleId
@@ -229,8 +236,9 @@ xsd:date rdf:type rdfs:Datatype .
                                                   )
                                     ] ;
                         rdfs:range xsd:anyURI ;
-                        rdfs:comment "Identifier of a meta-component that contains respective finalized provenance component’s metadata"@en ;
-                        rdfs:label "referencedMetaBundleID"@en .
+                        rdfs:comment "identifier of a meta-component that contains respective finalized provenance component’s metadata"@en ;
+                        rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                        rdfs:label "referencedMetaBundleId"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#referencedMetaBundleSpecV
@@ -242,51 +250,20 @@ xsd:date rdf:type rdfs:Datatype .
                                                      )
                                        ] ;
                            rdfs:range xsd:string ;
-                           rdfs:comment "Specification of the CPM version that is used to represent the content of the referenced meta-component. A value specifying an ISO document has the format ISO-[DOC_TYPE]-[PROJECT-CODE]-[PART]:[YEAR-OF-PUBLICATION], where DOC_TYPE is IS, TS or PAS, e.g. ISO-IS-23494-2:2026."@en ;
-                           rdfs:label "referencedMetaBundleSpecificationVersion"@en .
+                           <http://purl.org/vocab/vann/usageNote> "A value specifying an ISO document has the format ISO-[DOC_TYPE]-[PROJECT-CODE]-[PART]:[YEAR-OF-PUBLICATION], where DOC_TYPE is IS, TS or PAS, e.g. ISO-IS-23494-2:2026."@en ;
+                           rdfs:comment "specification of the CPM version that is used to represent the content of the referenced meta-component. Used together with the cpm:referencedMetaBundleId attribute."@en ;
+                           rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                           rdfs:label "referencedMetaBundleSpecV"@en .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.w3.org/2002/07/owl#Thing
-owl:Thing rdf:type owl:Class ;
-          rdfs:label "owl:Thing" .
-
-
-###  http://www.w3.org/ns/prov#Activity
-<http://www.w3.org/ns/prov#Activity> rdf:type owl:Class ;
-                                     rdfs:label "prov:Activity" .
-
-
-###  http://www.w3.org/ns/prov#Agent
-<http://www.w3.org/ns/prov#Agent> rdf:type owl:Class ;
-                                  rdfs:label "prov:Agent" .
-
-
-###  http://www.w3.org/ns/prov#Entity
-<http://www.w3.org/ns/prov#Entity> rdf:type owl:Class ;
-                                   rdfs:label "prov:Entity" .
-
-
-###  http://www.w3.org/ns/prov#Organization
-<http://www.w3.org/ns/prov#Organization> rdf:type owl:Class ;
-                                         rdfs:label "prov:Organization" .
-
-
-###  http://www.w3.org/ns/prov#Role
-<http://www.w3.org/ns/prov#Role> rdf:type owl:Class ;
-                                 rdfs:label "prov:Role" .
-
-
 ###  https://www.commonprovenancemodel.org/cpm#BackwardConnector
 :BackwardConnector rdf:type owl:Class ;
+                   owl:equivalentClass :backwardConnector ;
                    rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                     owl:hasValue :backwardConnector
-                                   ] ,
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty :hashAlg ;
                                      owl:minCardinality "1"^^xsd:nonNegativeInteger
@@ -312,49 +289,36 @@ owl:Thing rdf:type owl:Class ;
                                      owl:minCardinality "1"^^xsd:nonNegativeInteger
                                    ] ;
                    rdfs:comment "A connector that represents a received described object"@en ;
+                   rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                    rdfs:label "BackwardConnector"@en .
-
-
-###  https://www.commonprovenancemodel.org/cpm#CPMType
-:CPMType rdf:type owl:Class ;
-         rdfs:comment "A class representing the vocabulary of normative 'prov:type' values defined by the Common Provenance Framework."@en ;
-         rdfs:label "CPM Type Vocabulary"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#CurrentAgent
 :CurrentAgent rdf:type owl:Class ;
-              rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ,
-                              <http://www.w3.org/ns/prov#Organization> ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                owl:hasValue :currentAgent
-                              ] ,
+              owl:equivalentClass :currentAgent ;
+              rdfs:subClassOf <http://www.w3.org/ns/prov#Organization> ,
                               [ rdf:type owl:Restriction ;
                                 owl:onProperty :contactIdPid ;
                                 owl:minCardinality "1"^^xsd:nonNegativeInteger
                               ] ;
               rdfs:comment "A provenance structure that represents a provenance controller"@en ;
+              rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
               rdfs:label "CurrentAgent"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#ForwardConnector
 :ForwardConnector rdf:type owl:Class ;
-                  rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                    owl:hasValue :forwardConnector
-                                  ] ;
+                  owl:equivalentClass :forwardConnector ;
+                  rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
                   rdfs:comment "A connector that represents a described object that can be sent from a sender to a receiver"@en ;
+                  rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                   rdfs:label "ForwardConnector"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#ForwardConnectorSpecialized
 :ForwardConnectorSpecialized rdf:type owl:Class ;
+                             owl:equivalentClass :specForwardConnector ;
                              rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ,
-                                             [ rdf:type owl:Restriction ;
-                                               owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                               owl:hasValue :specForwardConnector
-                                             ] ,
                                              [ rdf:type owl:Restriction ;
                                                owl:onProperty :hashAlg ;
                                                owl:minCardinality "1"^^xsd:nonNegativeInteger
@@ -380,16 +344,14 @@ owl:Thing rdf:type owl:Class ;
                                                owl:minCardinality "1"^^xsd:nonNegativeInteger
                                              ] ;
                              rdfs:comment "A connector that represents a described object that has been sent from a sender to a receiver"@en ;
+                             rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                              rdfs:label "ForwardConnectorSpecialized"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#IdentifierEntity
 :IdentifierEntity rdf:type owl:Class ;
+                  owl:equivalentClass :id ;
                   rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                    owl:hasValue :id
-                                  ] ,
                                   [ rdf:type owl:Restriction ;
                                     owl:onProperty :externalId ;
                                     owl:minCardinality "1"^^xsd:nonNegativeInteger
@@ -399,16 +361,14 @@ owl:Thing rdf:type owl:Class ;
                                     owl:minCardinality "1"^^xsd:nonNegativeInteger
                                   ] ;
                   rdfs:comment "A provenance structure that represents an external identifier"@en ;
+                  rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                   rdfs:label "IdentifierEntity"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#MainActivity
 :MainActivity rdf:type owl:Class ;
+              owl:equivalentClass :mainActivity ;
               rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                owl:hasValue :mainActivity
-                              ] ,
                               [ rdf:type owl:Restriction ;
                                 owl:onProperty :referencedMetaBundleId ;
                                 owl:minCardinality "1"^^xsd:nonNegativeInteger
@@ -418,99 +378,90 @@ owl:Thing rdf:type owl:Class ;
                                 owl:minCardinality "1"^^xsd:nonNegativeInteger
                               ] ;
               rdfs:comment "A provenance structure that represents the described activity documented in a particular provenance component"@en ;
+              rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
               rdfs:label "MainActivity"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#ReceiverAgent
 :ReceiverAgent rdf:type owl:Class ;
-               rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ,
-                               <http://www.w3.org/ns/prov#Organization> ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                                 owl:hasValue :receiverAgent
-                               ] ,
+               owl:equivalentClass :receiverAgent ;
+               rdfs:subClassOf <http://www.w3.org/ns/prov#Organization> ,
                                [ rdf:type owl:Restriction ;
                                  owl:onProperty :contactIdPid ;
                                  owl:minCardinality "1"^^xsd:nonNegativeInteger
                                ] ;
                rdfs:comment "A provenance structure that represents a receiver in the context of passing a described object between two provenance controllers"@en ;
+               rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
                rdfs:label "ReceiverAgent"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#SenderAgent
 :SenderAgent rdf:type owl:Class ;
-             rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ,
-                             <http://www.w3.org/ns/prov#Organization> ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty <http://www.w3.org/ns/prov#type> ;
-                               owl:hasValue :senderAgent
-                             ] ,
+             owl:equivalentClass :senderAgent ;
+             rdfs:subClassOf <http://www.w3.org/ns/prov#Organization> ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty :contactIdPid ;
                                owl:minCardinality "1"^^xsd:nonNegativeInteger
                              ] ;
              rdfs:comment "A provenance structure that represents a sender in the context of passing a described object between two provenance controllers"@en ;
+             rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
              rdfs:label "SenderAgent"@en .
 
 
-#################################################################
-#    Individuals
-#################################################################
-
 ###  https://www.commonprovenancemodel.org/cpm#backwardConnector
-:backwardConnector rdf:type owl:NamedIndividual ,
-                            :CPMType ;
-                   rdfs:comment "CPM type value representing a backward connector."@en ;
-                   rdfs:label "Backward Connector Role"@en .
+:backwardConnector rdf:type owl:Class ;
+                   rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:backwardConnector'). Declared as a class equivalent to cpm:BackwardConnector so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:BackwardConnector."@en ;
+                   rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                   rdfs:label "backwardConnector"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#currentAgent
-:currentAgent rdf:type owl:NamedIndividual ,
-                       :CPMType ;
-              rdfs:comment "CPM type value representing a current agent."@en ;
-              rdfs:label "Current Agent Role"@en .
+:currentAgent rdf:type owl:Class ;
+              rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:currentAgent'). Declared as a class equivalent to cpm:CurrentAgent so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:CurrentAgent."@en ;
+              rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+              rdfs:label "currentAgent"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#forwardConnector
-:forwardConnector rdf:type owl:NamedIndividual ,
-                           :CPMType ;
-                  rdfs:comment "CPM type value representing a forward connector."@en ;
-                  rdfs:label "Forward Connector Role"@en .
+:forwardConnector rdf:type owl:Class ;
+                  rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:forwardConnector'). Declared as a class equivalent to cpm:ForwardConnector so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:ForwardConnector."@en ;
+                  rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                  rdfs:label "forwardConnector"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#id
-:id rdf:type owl:NamedIndividual ,
-             :CPMType ;
-    rdfs:comment "CPM type value representing an identifier entity."@en ;
-    rdfs:label "Identifier Entity Role"@en .
+:id rdf:type owl:Class ;
+    rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:id'). Declared as a class equivalent to cpm:IdentifierEntity so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:IdentifierEntity."@en ;
+    rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+    rdfs:label "id"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#mainActivity
-:mainActivity rdf:type owl:NamedIndividual ,
-                       :CPMType ;
-              rdfs:comment "CPM type value representing a main activity."@en ;
-              rdfs:label "Main Activity Role"@en .
+:mainActivity rdf:type owl:Class ;
+              rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:mainActivity'). Declared as a class equivalent to cpm:MainActivity so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:MainActivity."@en ;
+              rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+              rdfs:label "mainActivity"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#receiverAgent
-:receiverAgent rdf:type owl:NamedIndividual ,
-                        :CPMType ;
-               rdfs:comment "CPM type value representing a receiver agent."@en ;
-               rdfs:label "Receiver Agent Role"@en .
+:receiverAgent rdf:type owl:Class ;
+               rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:receiverAgent'). Declared as a class equivalent to cpm:ReceiverAgent so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:ReceiverAgent."@en ;
+               rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+               rdfs:label "receiverAgent"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#senderAgent
-:senderAgent rdf:type owl:NamedIndividual ,
-                      :CPMType ;
-             rdfs:comment "CPM type value representing a sender agent."@en ;
-             rdfs:label "Sender Agent Role"@en .
+:senderAgent rdf:type owl:Class ;
+             rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:senderAgent'). Declared as a class equivalent to cpm:SenderAgent so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:SenderAgent."@en ;
+             rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+             rdfs:label "senderAgent"@en .
 
 
 ###  https://www.commonprovenancemodel.org/cpm#specForwardConnector
-:specForwardConnector rdf:type owl:NamedIndividual ,
-                               :CPMType ;
-                      rdfs:comment "CPM type value representing a forward connector specialized."@en ;
-                      rdfs:label "Specialized Forward Connector Role"@en .
+:specForwardConnector rdf:type owl:Class ;
+                      rdfs:comment "CPM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='cpm:specForwardConnector'). Declared as a class equivalent to cpm:ForwardConnectorSpecialized so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as cpm:ForwardConnectorSpecialized."@en ;
+                      rdfs:isDefinedBy <https://www.commonprovenancemodel.org/cpm#> ;
+                      rdfs:label "specForwardConnector"@en .
 
 
 ###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/

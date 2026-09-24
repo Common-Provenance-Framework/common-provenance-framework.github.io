@@ -2,12 +2,24 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix : <> .
-<https://www.commonprovenancemodel.org/cpm/1.0.0/cpm.ttl> a prov:Entity;
+<https://www.commonprovenancemodel.org/cpm/1.0.0> a prov:Entity;
 	 dc:title "Common Provenance Model Ontology (CPM-O)";
 	 prov:wasAttributedTo :agent0;
 	 prov:wasAttributedTo :agent1;
+	 prov:wasAttributedTo :agent2;
+	 prov:wasAttributedTo :agent3;
+	 prov:wasAttributedTo :agent4;
+	 prov:wasAttributedTo :agent5;
+	 prov:wasAttributedTo :agent6;
+	 prov:wasAttributedTo :agent7;
 	 prov:wasAttributedTo <https://github.com/dgarijo/Widoco/>,<http://www.essepuntato.it/lode/>;
 	 prov:wasGeneratedAt "2026-02-05";
 .
-:agent0 a prov:Agent; foaf:name "Bc. Stanislav Prikryl".
-:agent1 a prov:Agent; foaf:name "RNDr. Rudolf Wittner".
+:agent0 a prov:Agent; foaf:name "Cecilia Mascia".
+:agent1 a prov:Agent; foaf:name "Francesca Frexia".
+:agent2 a prov:Agent; foaf:name "Heimo Müller".
+:agent3 a prov:Agent; foaf:name "Jörg Geiger".
+:agent4 a prov:Agent; foaf:name "Markus Plass".
+:agent5 a prov:Agent; foaf:name "Matej Gallo".
+:agent6 a prov:Agent; foaf:name "Petr Holub".
+:agent7 a prov:Agent; foaf:name "Rudolf Wittner".
