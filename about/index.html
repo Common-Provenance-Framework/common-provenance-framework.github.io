@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acknowledgements</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="cpm-header">
+<link rel="stylesheet" href="/assets/fonts.css">
+<a class="cpm-skip" href="#main">Skip to content</a>
+<nav class="cpm-nav" aria-label="Main">
+  <style>
+    .cpm-header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid #e3e6ea;
+                  -webkit-backdrop-filter: saturate(160%) blur(6px); backdrop-filter: saturate(160%) blur(6px);
+                  font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.5; text-align: left; }
+    .cpm-skip { position: absolute; left: -999px; top: 0.5rem; background: #1f3a5f; color: #fff; padding: 0.4rem 0.8rem; border-radius: 4px; }
+    .cpm-skip:focus { left: 0.5rem; }
+    .cpm-nav { max-width: 76rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); display: flex; flex-wrap: wrap;
+               align-items: center; gap: 0 1.6rem; min-height: 4rem; }
+    .cpm-nav a { color: #4a5562; text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 1.1rem 0 1rem;
+                 border-bottom: 2px solid transparent; }
+    .cpm-nav a:hover { color: #1f3a5f; background: transparent; }
+    .cpm-nav a[href]:hover { background: transparent; }  /* override WIDOCO's link hover highlight */
+    .cpm-nav a.cpm-top.active { color: #1c2530; border-bottom-color: #e8742a; }
+    .cpm-nav .cpm-brand { display: flex; align-items: center; gap: 0.65rem; margin-right: auto; padding: 0.6rem 0;
+                          border: 0; color: #1f3a5f; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
+    .cpm-nav .cpm-brand:hover { color: #1f3a5f; }
+    .cpm-nav .cpm-mark { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem;
+                         border-radius: 6px; background: #1f3a5f; color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+                         box-shadow: inset -4px -4px 0 #e8742a; }
+    /* dropdowns: open on hover (mouse), on keyboard focus, or by the caret button (touch) */
+    .cpm-nav .cpm-dd { position: relative; display: flex; align-items: center; }
+    .cpm-nav .cpm-caret { background: none; border: 0; color: #6b7682; cursor: pointer; font: inherit; font-size: 0.7em;
+                          padding: 0.25rem 0.15rem; margin: 0 0 0 0.2rem; line-height: 1; }
+    .cpm-nav .cpm-sub { position: absolute; top: calc(100% - 0.35rem); left: -0.9rem; min-width: 17rem; margin: 0; padding: 0.45rem 0;
+                        list-style: none; background: #ffffff; border: 1px solid #e3e6ea; border-radius: 6px;
+                        box-shadow: 0 10px 28px rgba(28, 37, 48, 0.12); text-align: left;
+                        visibility: hidden; opacity: 0; transform: translateY(4px);
+                        transition: opacity 0.15s, transform 0.15s, visibility 0s linear 0.3s; }
+    .cpm-nav .cpm-dd--end .cpm-sub { left: auto; right: -0.9rem; }   /* set by the script when the menu would leave the window */
+    .cpm-nav .cpm-dd:hover .cpm-sub, .cpm-nav .cpm-dd:focus-within .cpm-sub, .cpm-nav .cpm-dd.open .cpm-sub {
+                        visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+    .cpm-nav .cpm-sub li { margin: 0; padding: 0; list-style: none; background: none; }
+    .cpm-nav .cpm-sub a { display: block; color: #1c2530; font-weight: 600; font-size: 0.9rem; padding: 0.45rem 1rem; border: 0; white-space: nowrap; }
+    .cpm-nav .cpm-sub a[href]:hover, .cpm-nav .cpm-sub a:focus, .cpm-nav .cpm-sub a.active { background: #f5f7f9; color: #1f3a5f; }
+    .cpm-nav .cpm-sub a.active { box-shadow: inset 3px 0 0 #e8742a; }
+    .cpm-nav .cpm-sub small { display: block; color: #6b7682; font-weight: 400; font-size: 0.8rem; }
+    @media (max-width: 48rem) {
+      .cpm-nav { gap: 0 1.1rem; }
+      .cpm-nav .cpm-brand { flex-basis: 100%; }
+      .cpm-nav a { padding: 0.5rem 0 0.6rem; }
+    }
+  </style>
+  <a class="cpm-brand" href="/"><span class="cpm-mark" aria-hidden="true">CPM</span>Common Provenance Model</a>
+  <a class="cpm-top cpm-home" href="/">Home</a>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/specification/">CPM specification</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="CPM specification sections">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/specification/#spec-terminology">Terminology</a></li>
+      <li><a href="/specification/#spec-chain">Provenance chains</a></li>
+      <li><a href="/specification/#spec-component">Structure of a provenance component</a></li>
+      <li><a href="/specification/#spec-linking">Linking provenance components</a></li>
+      <li><a href="/specification/#spec-rules">Summary of rules</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/ontologies/">Ontologies</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Ontologies">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/ns/cpm/">CPM-O<small>Common Provenance Model Ontology</small></a></li>
+      <li><a href="/ns/pbm/">PBM-O<small>Provenance of Biological Material Ontology</small></a></li>
+      <li><a href="/ns/pdg/">PDG-O<small>Provenance of Data Generation Ontology</small></a></li>
+      <li><a href="/ontologies/known-issues/">Known issues</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/usage/">Usage</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Usage">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/usage/traversal/">Traversal algorithm</a></li>
+      <li><a href="/usage/examples/">Examples</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/about/">About</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="About">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/about/">Acknowledgements</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      function mark(sel) { document.querySelectorAll(sel).forEach(function (a) { a.classList.add("active"); }); }
+      // active top-level tab
+      if (p === "/" || p === "/index.html") { mark('.cpm-nav a.cpm-home'); }
+      var map = { "/specification/": "/specification/", "/ontologies/": "/ontologies/", "/ns/": "/ontologies/", "/usage/": "/usage/", "/about/": "/about/" };
+      Object.keys(map).forEach(function (k) {
+        if (p.indexOf(k) === 0) { mark('.cpm-nav a.cpm-top[href="' + map[k] + '"]'); }
+      });
+      // current ontology in the dropdown
+      ["/ns/cpm/", "/ns/pbm/", "/ns/pdg/", "/usage/traversal/", "/usage/examples/",
+       "/about/materials/", "/about/roadmap/", "/about/adoption/", "/ontologies/known-issues/"].forEach(function (k) {
+        if (p.indexOf(k) === 0 || p === k.slice(0, -1)) { mark('.cpm-nav .cpm-sub a[href="' + k + '"]'); }
+      });
+      if (p === "/about/" || p === "/about/index.html") { mark('.cpm-nav .cpm-sub a[href="/about/"]'); }
+      // on-page table of contents: filled from the h2/h3 headings of .content into aside.toc
+      document.addEventListener("DOMContentLoaded", function () {
+        var aside = document.querySelector("aside.toc"), content = document.querySelector(".content");
+        if (!aside || !content) { return; }
+        var hs = content.querySelectorAll("h2[id], h3[id]"), links = [];
+        if (!hs.length) { return; }
+        var title = document.createElement("p"); title.className = "toc-title"; title.textContent = "On this page";
+        var root = document.createElement("ol"), sub = null;
+        hs.forEach(function (h) {
+          var li = document.createElement("li"), a = document.createElement("a");
+          a.href = "#" + h.id; a.textContent = h.textContent; li.appendChild(a); links.push([h, a]);
+          if (h.tagName === "H2") { root.appendChild(li); sub = null; }
+          else { if (!sub) { sub = document.createElement("ol"); (root.lastElementChild || root).appendChild(sub); } sub.appendChild(li); }
+        });
+        aside.appendChild(title); aside.appendChild(root);
+        function spy() {
+          var cur = links[0];
+          links.forEach(function (x) { if (x[0].getBoundingClientRect().top < 120) { cur = x; } });
+          links.forEach(function (x) { x[1].classList.toggle("active", x === cur); });
+        }
+        window.addEventListener("scroll", spy, { passive: true }); spy();
+      });
+      // caret buttons: toggle on click/tap; close on outside click or Escape
+      var dds = document.querySelectorAll(".cpm-nav .cpm-dd");
+      function closeAll(except) {
+        dds.forEach(function (d) { if (d !== except) { d.classList.remove("open");
+          d.querySelector(".cpm-caret").setAttribute("aria-expanded", "false"); } });
+      }
+      // a dropdown that would extend past the right edge of the window opens to the left instead
+      function fit(d) {
+        d.classList.remove("cpm-dd--end");
+        var r = d.querySelector(".cpm-sub").getBoundingClientRect();
+        if (r.right > document.documentElement.clientWidth - 8) { d.classList.add("cpm-dd--end"); }
+      }
+      dds.forEach(function (d) {
+        var b = d.querySelector(".cpm-caret");
+        d.addEventListener("mouseenter", function () { fit(d); });
+        d.addEventListener("focusin", function () { fit(d); });
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          fit(d);
+          var open = !d.classList.contains("open");
+          closeAll(d);
+          d.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      });
+      // also on load and resize: a hidden menu that extends past the window would otherwise widen the page
+      function fitAll() { dds.forEach(fit); }
+      fitAll();
+      window.addEventListener("resize", fitAll);
+      document.addEventListener("click", function () { closeAll(null); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeAll(null); if (document.activeElement && document.activeElement.closest(".cpm-dd")) { document.activeElement.blur(); } }
+      });
+    })();
+  </script>
+</nav>
+</header>
+
+<main class="page" id="main">
+<h1 id="acknowledgements">Acknowledgements</h1>
+
+<h2 id="organisations">Organisations</h2>
+<p>The following organizations were the main contributors to the Common Provenance Model.</p>
+<ul class="logos">
+  <li>
+    <a href="https://www.bbmri-eric.eu/"><img src="/about/img/bbmri-eric.jpg" alt="BBMRI-ERIC logo"></a>
+    <span><a href="https://www.bbmri-eric.eu/">BBMRI-ERIC</a></span>
+  </li>
+  <li>
+    <a href="https://ics.muni.cz/en"><img src="/about/img/muni-ics.png" alt="Institute of Computer Science, Masaryk University logo"></a>
+    <span><a href="https://ics.muni.cz/en">Institute of Computer Science, Masaryk University</a></span>
+  </li>
+  <li>
+    <a href="https://www.crs4.it/"><img src="/about/img/crs4.png" alt="CRS4 logo"></a>
+    <span><a href="https://www.crs4.it/">CRS4</a><br>Centro di Ricerca, Sviluppo e Studi Superiori in Sardegna</span>
+  </li>
+  <li>
+    <a href="https://www.medunigraz.at/en/"><img src="/about/img/medunigraz.png" alt="Medical University of Graz logo"></a>
+    <span><a href="https://www.medunigraz.at/en/">Medical University of Graz</a></span>
+  </li>
+  <li>
+    <a href="https://www.ukw.de/en/clinical-departments/interdisciplinary-research-and-treatment-centers/interdisciplinary-bank-of-biomaterials-and-data-wuerzburg-ibdw/"><img src="/about/img/ibdw.png" alt="Interdisciplinary Bank of Biomaterials and Data Würzburg (ibdw) logo"></a>
+    <span><a href="https://www.ukw.de/en/clinical-departments/interdisciplinary-research-and-treatment-centers/interdisciplinary-bank-of-biomaterials-and-data-wuerzburg-ibdw/">Interdisciplinary Bank of Biomaterials and Data Würzburg (ibdw)</a></span>
+  </li>
+</ul>
+
+<h2 id="projects">Projects</h2>
+<p>The work on the Common Provenance Model has been supported by the following projects funded by the European Union:</p>
+<ul class="logos">
+  <li>
+    <a href="https://www.eosc-life.eu/"><img src="/about/img/eosc-life.png" alt="EOSC-Life logo"></a>
+    <span><a href="https://www.eosc-life.eu/">EOSC-Life</a><br>grant agreement No. 824087</span>
+  </li>
+  <li>
+    <a href="https://by-covid.org/"><img src="/about/img/by-covid-logo-light-bg.svg" alt="BY-COVID logo"></a>
+    <span><a href="https://by-covid.org/">BY-COVID</a><br>grant agreement No. 101046203</span>
+  </li>
+  <li>
+    <a href="https://www.bbmri-eric.eu/scientific-collaboration/evolvebbmri/"><img src="/about/img/evolvebbmri.png" alt="EvolveBBMRI logo"></a>
+    <span><a href="https://www.bbmri-eric.eu/scientific-collaboration/evolvebbmri/">EvolveBBMRI</a><br>grant agreement No. 101131701</span>
+  </li>
+  <li>
+    <a href="https://quantumproject.eu/"><img src="/about/img/quantum.png" alt="QUANTUM logo"></a>
+    <span><a href="https://quantumproject.eu/">QUANTUM</a><br>grant agreement No. 101137057</span>
+  </li>
+</ul>
+<div class="eu-ack">
+  <svg class="eu-emblem" viewBox="0 0 810 540" role="img" aria-label="Emblem of the European Union">
+    <rect width="810" height="540" fill="#003399"/>
+    <g fill="#FFCC00">
+      <polygon points="405.00,60.00 411.74,80.73 433.53,80.73 415.90,93.54 422.63,114.27 405.00,101.46 387.37,114.27 394.10,93.54 376.47,80.73 398.26,80.73"/>
+      <polygon points="495.00,84.12 501.74,104.84 523.53,104.84 505.90,117.66 512.63,138.39 495.00,125.57 477.37,138.39 484.10,117.66 466.47,104.84 488.26,104.84"/>
+      <polygon points="560.88,150.00 567.62,170.73 589.42,170.73 571.78,183.54 578.52,204.27 560.88,191.46 543.25,204.27 549.99,183.54 532.35,170.73 554.15,170.73"/>
+      <polygon points="585.00,240.00 591.74,260.73 613.53,260.73 595.90,273.54 602.63,294.27 585.00,281.46 567.37,294.27 574.10,273.54 556.47,260.73 578.26,260.73"/>
+      <polygon points="560.88,330.00 567.62,350.73 589.42,350.73 571.78,363.54 578.52,384.27 560.88,371.46 543.25,384.27 549.99,363.54 532.35,350.73 554.15,350.73"/>
+      <polygon points="495.00,395.88 501.74,416.61 523.53,416.61 505.90,429.43 512.63,450.16 495.00,437.34 477.37,450.16 484.10,429.43 466.47,416.61 488.26,416.61"/>
+      <polygon points="405.00,420.00 411.74,440.73 433.53,440.73 415.90,453.54 422.63,474.27 405.00,461.46 387.37,474.27 394.10,453.54 376.47,440.73 398.26,440.73"/>
+      <polygon points="315.00,395.88 321.74,416.61 343.53,416.61 325.90,429.43 332.63,450.16 315.00,437.34 297.37,450.16 304.10,429.43 286.47,416.61 308.26,416.61"/>
+      <polygon points="249.12,330.00 255.85,350.73 277.65,350.73 260.01,363.54 266.75,384.27 249.12,371.46 231.48,384.27 238.22,363.54 220.58,350.73 242.38,350.73"/>
+      <polygon points="225.00,240.00 231.74,260.73 253.53,260.73 235.90,273.54 242.63,294.27 225.00,281.46 207.37,294.27 214.10,273.54 196.47,260.73 218.26,260.73"/>
+      <polygon points="249.12,150.00 255.85,170.73 277.65,170.73 260.01,183.54 266.75,204.27 249.12,191.46 231.48,204.27 238.22,183.54 220.58,170.73 242.38,170.73"/>
+      <polygon points="315.00,84.12 321.74,104.84 343.53,104.84 325.90,117.66 332.63,138.39 315.00,125.57 297.37,138.39 304.10,117.66 286.47,104.84 308.26,104.84"/>
+    </g>
+  </svg>
+  <p>Funded by the European Union</p>
+</div>
+</main>
+<footer class="cpm-footer">
+  <style>
+    .cpm-footer { margin-top: 3rem; background: #f5f7f9; border-top: 1px solid #e3e6ea; color: #4a5562;
+                  font-family: "Lato", "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; line-height: 1.6; text-align: left; }
+    .cpm-footer-inner { max-width: 76rem; margin: 0 auto; padding: 2.25rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+                        display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; }
+    .cpm-footer .cpm-footer-brand { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 800; color: #1f3a5f; font-size: 1rem; margin: 0 0 0.3rem; }
+    .cpm-footer p { margin: 0 0 0.4rem; max-width: 34rem; }
+    .cpm-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem;
+                     font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 600; }
+    .cpm-footer li { margin: 0; background: none; }
+    .cpm-footer a { color: #1f3a5f; text-decoration: none; }
+    .cpm-footer a:hover { color: #b9561a; background: transparent; }
+    .cpm-footer .todo { background: #fff4ce; border: 1px dashed #e0c36a; padding: 0.1em 0.35em; border-radius: 3px; }
+    .cpm-footer .attention, .cpm-footer .attention a { color: #c0392b; }   /* to be reviewed */
+  </style>
+  <div class="cpm-footer-inner">
+    <div>
+      <p class="cpm-footer-brand">Common Provenance Model</p>
+      <p><a href="https://github.com/Common-Provenance-Framework">Common Provenance Framework on GitHub</a></p>
+      <p>Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      <p class="attention">Contact: <a href="mailto:Rudolf.wittner@bbmri-eric.eu">Rudolf.wittner@bbmri-eric.eu</a></p>
+    </div>
+    <ul>
+      <li><a href="/specification/">CPM specification</a></li>
+      <li><a href="/ontologies/">Ontologies</a></li>
+      <li><a href="/usage/">Usage</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

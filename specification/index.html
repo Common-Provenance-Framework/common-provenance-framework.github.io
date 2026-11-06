@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPM specification</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="cpm-header">
+<link rel="stylesheet" href="/assets/fonts.css">
+<a class="cpm-skip" href="#main">Skip to content</a>
+<nav class="cpm-nav" aria-label="Main">
+  <style>
+    .cpm-header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid #e3e6ea;
+                  -webkit-backdrop-filter: saturate(160%) blur(6px); backdrop-filter: saturate(160%) blur(6px);
+                  font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.5; text-align: left; }
+    .cpm-skip { position: absolute; left: -999px; top: 0.5rem; background: #1f3a5f; color: #fff; padding: 0.4rem 0.8rem; border-radius: 4px; }
+    .cpm-skip:focus { left: 0.5rem; }
+    .cpm-nav { max-width: 76rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); display: flex; flex-wrap: wrap;
+               align-items: center; gap: 0 1.6rem; min-height: 4rem; }
+    .cpm-nav a { color: #4a5562; text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 1.1rem 0 1rem;
+                 border-bottom: 2px solid transparent; }
+    .cpm-nav a:hover { color: #1f3a5f; background: transparent; }
+    .cpm-nav a[href]:hover { background: transparent; }  /* override WIDOCO's link hover highlight */
+    .cpm-nav a.cpm-top.active { color: #1c2530; border-bottom-color: #e8742a; }
+    .cpm-nav .cpm-brand { display: flex; align-items: center; gap: 0.65rem; margin-right: auto; padding: 0.6rem 0;
+                          border: 0; color: #1f3a5f; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
+    .cpm-nav .cpm-brand:hover { color: #1f3a5f; }
+    .cpm-nav .cpm-mark { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem;
+                         border-radius: 6px; background: #1f3a5f; color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+                         box-shadow: inset -4px -4px 0 #e8742a; }
+    /* dropdowns: open on hover (mouse), on keyboard focus, or by the caret button (touch) */
+    .cpm-nav .cpm-dd { position: relative; display: flex; align-items: center; }
+    .cpm-nav .cpm-caret { background: none; border: 0; color: #6b7682; cursor: pointer; font: inherit; font-size: 0.7em;
+                          padding: 0.25rem 0.15rem; margin: 0 0 0 0.2rem; line-height: 1; }
+    .cpm-nav .cpm-sub { position: absolute; top: calc(100% - 0.35rem); left: -0.9rem; min-width: 17rem; margin: 0; padding: 0.45rem 0;
+                        list-style: none; background: #ffffff; border: 1px solid #e3e6ea; border-radius: 6px;
+                        box-shadow: 0 10px 28px rgba(28, 37, 48, 0.12); text-align: left;
+                        visibility: hidden; opacity: 0; transform: translateY(4px);
+                        transition: opacity 0.15s, transform 0.15s, visibility 0s linear 0.3s; }
+    .cpm-nav .cpm-dd--end .cpm-sub { left: auto; right: -0.9rem; }   /* set by the script when the menu would leave the window */
+    .cpm-nav .cpm-dd:hover .cpm-sub, .cpm-nav .cpm-dd:focus-within .cpm-sub, .cpm-nav .cpm-dd.open .cpm-sub {
+                        visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+    .cpm-nav .cpm-sub li { margin: 0; padding: 0; list-style: none; background: none; }
+    .cpm-nav .cpm-sub a { display: block; color: #1c2530; font-weight: 600; font-size: 0.9rem; padding: 0.45rem 1rem; border: 0; white-space: nowrap; }
+    .cpm-nav .cpm-sub a[href]:hover, .cpm-nav .cpm-sub a:focus, .cpm-nav .cpm-sub a.active { background: #f5f7f9; color: #1f3a5f; }
+    .cpm-nav .cpm-sub a.active { box-shadow: inset 3px 0 0 #e8742a; }
+    .cpm-nav .cpm-sub small { display: block; color: #6b7682; font-weight: 400; font-size: 0.8rem; }
+    @media (max-width: 48rem) {
+      .cpm-nav { gap: 0 1.1rem; }
+      .cpm-nav .cpm-brand { flex-basis: 100%; }
+      .cpm-nav a { padding: 0.5rem 0 0.6rem; }
+    }
+  </style>
+  <a class="cpm-brand" href="/"><span class="cpm-mark" aria-hidden="true">CPM</span>Common Provenance Model</a>
+  <a class="cpm-top cpm-home" href="/">Home</a>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/specification/">CPM specification</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="CPM specification sections">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/specification/#spec-terminology">Terminology</a></li>
+      <li><a href="/specification/#spec-chain">Provenance chains</a></li>
+      <li><a href="/specification/#spec-component">Structure of a provenance component</a></li>
+      <li><a href="/specification/#spec-linking">Linking provenance components</a></li>
+      <li><a href="/specification/#spec-rules">Summary of rules</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/ontologies/">Ontologies</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Ontologies">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/ns/cpm/">CPM-O<small>Common Provenance Model Ontology</small></a></li>
+      <li><a href="/ns/pbm/">PBM-O<small>Provenance of Biological Material Ontology</small></a></li>
+      <li><a href="/ns/pdg/">PDG-O<small>Provenance of Data Generation Ontology</small></a></li>
+      <li><a href="/ontologies/known-issues/">Known issues</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/usage/">Usage</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Usage">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/usage/traversal/">Traversal algorithm</a></li>
+      <li><a href="/usage/examples/">Examples</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/about/">About</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="About">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/about/">Acknowledgements</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      function mark(sel) { document.querySelectorAll(sel).forEach(function (a) { a.classList.add("active"); }); }
+      // active top-level tab
+      if (p === "/" || p === "/index.html") { mark('.cpm-nav a.cpm-home'); }
+      var map = { "/specification/": "/specification/", "/ontologies/": "/ontologies/", "/ns/": "/ontologies/", "/usage/": "/usage/", "/about/": "/about/" };
+      Object.keys(map).forEach(function (k) {
+        if (p.indexOf(k) === 0) { mark('.cpm-nav a.cpm-top[href="' + map[k] + '"]'); }
+      });
+      // current ontology in the dropdown
+      ["/ns/cpm/", "/ns/pbm/", "/ns/pdg/", "/usage/traversal/", "/usage/examples/",
+       "/about/materials/", "/about/roadmap/", "/about/adoption/", "/ontologies/known-issues/"].forEach(function (k) {
+        if (p.indexOf(k) === 0 || p === k.slice(0, -1)) { mark('.cpm-nav .cpm-sub a[href="' + k + '"]'); }
+      });
+      if (p === "/about/" || p === "/about/index.html") { mark('.cpm-nav .cpm-sub a[href="/about/"]'); }
+      // on-page table of contents: filled from the h2/h3 headings of .content into aside.toc
+      document.addEventListener("DOMContentLoaded", function () {
+        var aside = document.querySelector("aside.toc"), content = document.querySelector(".content");
+        if (!aside || !content) { return; }
+        var hs = content.querySelectorAll("h2[id], h3[id]"), links = [];
+        if (!hs.length) { return; }
+        var title = document.createElement("p"); title.className = "toc-title"; title.textContent = "On this page";
+        var root = document.createElement("ol"), sub = null;
+        hs.forEach(function (h) {
+          var li = document.createElement("li"), a = document.createElement("a");
+          a.href = "#" + h.id; a.textContent = h.textContent; li.appendChild(a); links.push([h, a]);
+          if (h.tagName === "H2") { root.appendChild(li); sub = null; }
+          else { if (!sub) { sub = document.createElement("ol"); (root.lastElementChild || root).appendChild(sub); } sub.appendChild(li); }
+        });
+        aside.appendChild(title); aside.appendChild(root);
+        function spy() {
+          var cur = links[0];
+          links.forEach(function (x) { if (x[0].getBoundingClientRect().top < 120) { cur = x; } });
+          links.forEach(function (x) { x[1].classList.toggle("active", x === cur); });
+        }
+        window.addEventListener("scroll", spy, { passive: true }); spy();
+      });
+      // caret buttons: toggle on click/tap; close on outside click or Escape
+      var dds = document.querySelectorAll(".cpm-nav .cpm-dd");
+      function closeAll(except) {
+        dds.forEach(function (d) { if (d !== except) { d.classList.remove("open");
+          d.querySelector(".cpm-caret").setAttribute("aria-expanded", "false"); } });
+      }
+      // a dropdown that would extend past the right edge of the window opens to the left instead
+      function fit(d) {
+        d.classList.remove("cpm-dd--end");
+        var r = d.querySelector(".cpm-sub").getBoundingClientRect();
+        if (r.right > document.documentElement.clientWidth - 8) { d.classList.add("cpm-dd--end"); }
+      }
+      dds.forEach(function (d) {
+        var b = d.querySelector(".cpm-caret");
+        d.addEventListener("mouseenter", function () { fit(d); });
+        d.addEventListener("focusin", function () { fit(d); });
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          fit(d);
+          var open = !d.classList.contains("open");
+          closeAll(d);
+          d.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      });
+      // also on load and resize: a hidden menu that extends past the window would otherwise widen the page
+      function fitAll() { dds.forEach(fit); }
+      fitAll();
+      window.addEventListener("resize", fitAll);
+      document.addEventListener("click", function () { closeAll(null); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeAll(null); if (document.activeElement && document.activeElement.closest(".cpm-dd")) { document.activeElement.blur(); } }
+      });
+    })();
+  </script>
+</nav>
+</header>
+
+<main class="page page--toc" id="main">
+<div class="content">
+<h1>CPM specification</h1>
+<p class="lead">The Common Provenance Model (CPM) is a data model for representing trustworthy and
+confidentiality-preserving multi-organizational provenance information. It has been adopted and
+standardised by ISO as <a href="https://www.iso.org/standard/87714.html">ISO&nbsp;23494-2</a>
+(<em>Provenance information model for biological material and data — Part 2: Common provenance model</em>).</p>
+
+<dl class="spec-meta" id="spec-version">
+  <dt>This version</dt>
+  <dd><code>https://www.commonprovenancemodel.org/specification/1.0.0</code></dd>
+  <dt>Latest version</dt>
+  <dd><a href="/specification/"><code>https://www.commonprovenancemodel.org/specification/</code></a></dd>
+  <dt>Revision</dt>
+  <dd>1.0.0</dd>
+  <dt>Specification identifier</dt>
+  <dd>The IRI of this version, <code>https://www.commonprovenancemodel.org/specification/1.0.0</code>, identifies
+    the specification. It is used as the value of <code>cpm:referencedBundleSpecV</code> for finalized provenance
+    components that conform to this version.</dd>
+</dl>
+
+<h2 id="spec-terminology">Terminology</h2>
+
+<dl class="terms">
+  <dt id="term-described-object"><strong>Described object</strong></dt>
+  <dd>Physical or digital object to be traced.</dd>
+  <dt id="term-described-activity"><strong>Described activity</strong></dt>
+  <dd>Activity performed on a described object.</dd>
+  <dt id="term-provenance-information"><strong>Provenance information</strong></dt>
+  <dd>Information that documents the history of a described object and related described activities, and that contains information about the origin or source of the described object, any changes that have occurred since it was created, and who has had custody of it since it was created.</dd>
+  <dt id="term-provenance-component"><strong>Provenance component</strong></dt>
+  <dd>Provenance information represented according to the CPM with a unique identifier assigned to it.</dd>
+  <dt id="term-fpc"><strong>Finalized provenance component (FPC)</strong></dt>
+  <dd>Provenance component, which is prepared to be conserved or archived, and which is considered immutable.</dd>
+  <dt id="term-finalization-event"><strong>Finalization event</strong></dt>
+  <dd>An event in which provenance information is transformed into a finalized provenance component.</dd>
+  <dt id="term-meta-component"><strong>Meta-component</strong></dt>
+  <dd>Provenance component that contains metadata about a finalized provenance component.</dd>
+  <dt id="term-provenance-chain"><strong>Provenance chain</strong></dt>
+  <dd>A set of mutually interlinked finalized provenance components.</dd>
+  <dt id="term-provenance-controller"><strong>Provenance controller</strong></dt>
+  <dd>A party that determines the purposes for which and the means by which provenance information and finalized provenance components are collected, stored, and provided, and that collects finalized provenance components documenting relevant described activities.</dd>
+  <dt id="term-provenance-processor"><strong>Provenance processor</strong></dt>
+  <dd>A party that performs activities related to finalized provenance components, such as generation, storage, or provision of finalized provenance components.</dd>
+  <dt id="term-provenance-provider"><strong>Provenance provider</strong></dt>
+  <dd>A software, a device, a person, a subsystem, an organization, or a group that has a recognizable existence, carrying out described activities and supplying relevant provenance information.</dd>
+  <dt id="term-sender"><strong>Sender</strong></dt>
+  <dd>A provenance controller that provides a described object to a provenance controller.</dd>
+  <dt id="term-receiver"><strong>Receiver</strong></dt>
+  <dd>A provenance controller that receives a described object from a provenance controller.</dd>
+</dl>
+
+<h2 id="spec-chain">Provenance chains</h2>
+
+<p>The CPM and its underlying ontology (<a href="/ns/cpm/">CPM-O</a>) are suitable for situations in which documented objects (e.g. a sample) or their derivatives (e.g.
+data generated from a sample) are exchanged between organisations, so that each organisation can provide
+provenance information about only a part of the object's life cycle. Each organisation therefore generates a
+finalized provenance component (technically implemented as PROV Bundle), which is managed independently and interlinked with other related provenance
+components. A set of interlinked finalized provenance components forms a provenance chain. Figure&nbsp;1 shows
+an example.</p>
+
+<figure>
+  <img src="img/cpm.org.distributed-provenance-scheme.jpg" style="width: 100%; max-width: 836px" alt="Three organisations performing sample acquisition, sample processing, data generation, and data processing and analysis; each step is documented by proprietary provenance and by a finalized provenance component; the components are linked across organisational boundaries.">
+  <figcaption>Figure 1. General schema of a provenance chain.</figcaption>
+</figure>
+
+<h2 id="spec-component">Structure of a provenance component</h2>
+
+<p>Provenance information is represented as a semantically annotated oriented graph based on PROV-DM. The nodes
+represent entities, activities, or agents, and the edges represent their mutual relations.</p>
+
+<p>The core idea of the model is that each finalized provenance component is divided into two parts:</p>
+<ol>
+  <li><strong>Traversal information</strong>, which is domain-agnostic and serves as a signpost for distributed
+    provenance information and its traversal.</li>
+  <li><strong>Domain-specific information</strong>, which carries specific information about the described
+    objects and related activities.</li>
+</ol>
+
+<p>The traversal information is a standardised subgraph that is attached to an arbitrary PROV graph representing
+the domain-specific information. The attachment follows the compound activities pattern, i.e. it uses
+specialization relations (<code>prov:specializationOf</code>) and the attributes related to the main
+activity.</p>
+
+<p>Figure&nbsp;2 shows the general schema of the traversal information and the domain-specific information in a
+provenance chain.</p>
+
+<figure>
+  <img src="img/cpm-traversal-and-domain-information.png" style="width: 100%; max-width: 819px" alt="Three finalized provenance components, each containing traversal information linked to the neighbouring components and domain-specific provenance referencing provenance information in any format, e.g. hospital, laboratory, or biobank information systems, lab notebooks, workflows, logs, and repositories.">
+  <figcaption>Figure 2. General schema of the traversal information and the domain-specific information in a provenance chain.</figcaption>
+</figure>
+
+<h3 id="spec-traversal">Traversal information</h3>
+
+<p>CPM specifies a standardised representation of the traversal information, shown in Figure&nbsp;3. The
+traversal information expresses a described activity at the most coarse-grained level: the activity itself
+(<code>cpm:mainActivity</code>), its inputs (<code>cpm:backwardConnector</code>), its outputs
+(<code>cpm:forwardConnector</code>), the organisational responsibilities (<code>cpm:senderAgent</code>,
+<code>cpm:currentAgent</code>), and their mutual relations. To support forward navigation along the provenance
+chain, an output may be further described by specialized forward connectors
+(<code>cpm:specForwardConnector</code>): each is a specialization of the forward connector and represents the
+output as sent to a particular receiver (<code>cpm:receiverAgent</code>).</p>
+
+<figure>
+  <img src="img/cpm.org.Traversal information - general structure.jpg" style="width: 100%; max-width: 759px" alt="Main activity (cpm:mainActivity) that used Connector 1 (cpm:backwardConnector) and generated Connector 2 (cpm:forwardConnector); Connector 2 was derived from Connector 1; Connector 1 is attributed to the sender agent (cpm:senderAgent); the main activity is associated with the current agent (cpm:currentAgent); Connectors 3 and 4 (cpm:specForwardConnector) are specializations of Connector 2 and are attributed to receiver agents 1 and 2 (cpm:receiverAgent).">
+  <figcaption>Figure 3. General schema of the traversal information according to CPM.</figcaption>
+</figure>
+
+<p>The relations in Figure&nbsp;3 are PROV relations:</p>
+
+<table class="table">
+  <thead>
+    <tr><th>Relation</th><th>From</th><th>To</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>prov:used</code></td><td>main activity</td><td>backward connector</td></tr>
+    <tr><td><code>prov:wasGeneratedBy</code></td><td>forward connector</td><td>main activity</td></tr>
+    <tr><td><code>prov:wasDerivedFrom</code></td><td>forward connector</td><td>backward connector</td></tr>
+    <tr><td><code>prov:wasAttributedTo</code></td><td>backward connector</td><td>sender agent</td></tr>
+    <tr><td><code>prov:wasAssociatedWith</code></td><td>main activity</td><td>current agent</td></tr>
+    <tr><td><code>prov:specializationOf</code></td><td>specialized forward connector</td><td>forward connector</td></tr>
+    <tr><td><code>prov:wasAttributedTo</code></td><td>specialized forward connector</td><td>receiver agent</td></tr>
+  </tbody>
+</table>
+
+<h3 id="spec-attachment">Attaching domain-specific information</h3>
+
+<p>Figure&nbsp;4 shows how the domain-specific information is attached to the traversal information: entities of
+the domain-specific provenance graph are specializations (<code>prov:specializationOf</code>) of the connectors.</p>
+
+<figure>
+  <img src="img/cpm-domain-information-attachment.jpg" style="width: 100%; max-width: 747px" alt="Traversal information with Connector 1 (cpm:backwardConnector), the main activity (cpm:mainActivity), Connector 2 (cpm:forwardConnector) and Connectors 3 and 4 (cpm:specForwardConnector). In the domain-specific information, Entity 1 and Entity x belong to an arbitrary PROV-DM-based provenance graph; Entity 1 is a specialization of Connector 1 and Entity x is a specialization of Connector 2.">
+  <figcaption>Figure 4. Attachment of the domain-specific information to the traversal information.</figcaption>
+</figure>
+
+<h3 id="spec-identifiers">Identifying described objects</h3>
+
+<p>A described object is represented in a provenance component as a PROV entity. Its identifier is associated with
+the entity in one of two ways:</p>
+<ol>
+  <li><strong>Attribute <code>cpm:externalId</code></strong> of the entity: its value is the identifier of the
+    described object; no further information is associated with the identifier.</li>
+  <li><strong>Attribute <code>cpm:hasId</code> and identifier entity:</strong> the identifier is represented by an
+    alternate PROV entity of type <code>cpm:id</code> (the identifier entity), described below.</li>
+</ol>
+
+<p>In the second mechanism, the entity representing the described object and the identifier entity are related by
+<code>prov:alternateOf</code>. The entity representing the described object has the attribute
+<code>cpm:hasId</code>, whose value is the identifier of the identifier entity. The identifier entity has the
+attributes <code>cpm:externalId</code>, whose value is the identifier of the described object, and
+<code>cpm:externalIdType</code>, whose value is the type of this identifier (analogous to the Content-Type in email
+headers). Further information related to the identifier can be attached to the identifier entity. Using the type and
+the identifier, or other optional attributes, an application processing the entity can determine how to access the
+referenced object, where this is enabled. This provides a harmonized way of referring from a provenance component to
+an external system. The following PROV-N example shows the pattern; all identifiers and values are illustrative.</p>
+
+<pre>
+entity(ex:object1, [cpm:hasId="https://example.org/object1-id" %% xsd:anyURI])
+entity(ex:object1-id, [prov:type='cpm:id',
+                       cpm:externalId="10.5281/zenodo.8279525",
+                       cpm:externalIdType="DOI"])
+alternateOf(ex:object1, ex:object1-id)
+</pre>
+<p>Here, the prefix <code>ex</code> stands for <code>https://example.org/</code>, so the value of
+<code>cpm:hasId</code> is the full IRI of the identifier entity <code>ex:object1-id</code>.</p>
+<p>A described object can have multiple identifiers, but the two mechanisms should not be combined for a single
+described object in one provenance component. The PROV identifier of the entity should not be used as the identifier
+of the described object, as the requirements on the identifiers of the internal provenance structures may differ
+from the requirements on the identification of described objects.</p>
+
+<h3 id="spec-attributes">Attributes of the CPM structures</h3>
+
+<p>The following tables list the attributes of each structure of the traversal information and of the identifier
+entity. Mandatory attributes must be present; optional attributes may be added. The values of attributes of type
+<code>xsd:anyURI</code> are full IRIs typed as <code>xsd:anyURI</code>, e.g.
+<code>cpm:referencedBundleId="https://example.org/bundles/b0" %% xsd:anyURI</code> in PROV-N.</p>
+
+<h4 id="attr-main">Main activity</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:mainActivity</code></td><td>type of the structure</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleId</code></td><td><code>xsd:anyURI</code></td><td>identifier of the meta-component that contains the metadata of the respective finalized provenance component</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleSpecV</code></td><td><code>xsd:string</code></td><td>specification of the CPM version used to represent the content of the referenced meta-component</td></tr>
+  </tbody>
+</table>
+
+<h4 id="attr-backward">Backward connector</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:backwardConnector</code></td><td>type of the structure</td></tr>
+    <tr><td><code>cpm:referencedBundleId</code></td><td><code>xsd:anyURI</code></td><td>identifier of the finalized provenance component referenced by the connector</td></tr>
+    <tr><td><code>cpm:referencedBundleSpecV</code></td><td><code>xsd:string</code></td><td>specification of the CPM version used to represent the content of the referenced finalized provenance component, e.g. the <a href="#spec-version">identifier of this specification</a></td></tr>
+    <tr><td><code>cpm:referencedBundleHashValue</code></td><td><code>xsd:string</code></td><td>hash value of the finalized provenance component referenced by the connector</td></tr>
+    <tr><td><code>cpm:hashAlg</code></td><td><code>xsd:string</code></td><td>algorithm used to create the hash value</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleId</code></td><td><code>xsd:anyURI</code></td><td>identifier of the meta-component that contains the metadata of the respective finalized provenance component</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleSpecV</code></td><td><code>xsd:string</code></td><td>specification of the CPM version used to represent the content of the referenced meta-component</td></tr>
+    <tr class="attrs-group"><th colspan="3">Optional</th></tr>
+    <tr><td><code>cpm:provenanceServiceUri</code></td><td><code>xsd:anyURI</code></td><td>URI of a service where the referenced finalized provenance component can be requested using its identifier</td></tr>
+    <tr><td><code>cpm:externalId</code></td><td><code>xsd:string</code></td><td>external identifier of the described object or described activity</td></tr>
+    <tr><td><code>cpm:hasId</code></td><td>identifier of the identifier entity (<code>xsd:anyURI</code>)</td><td>reference to the identifier entity of the described object (see <a href="#spec-identifiers">Identifying described objects</a>)</td></tr>
+    <tr><td><code>cpm:comment</code></td><td><code>xsd:string</code></td><td>arbitrary comment or additional information</td></tr>
+  </tbody>
+</table>
+
+<h4 id="attr-forward">Forward connector</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:forwardConnector</code></td><td>type of the structure</td></tr>
+    <tr class="attrs-group"><th colspan="3">Optional</th></tr>
+    <tr><td><code>cpm:externalId</code></td><td><code>xsd:string</code></td><td>external identifier of the described object or described activity</td></tr>
+    <tr><td><code>cpm:hasId</code></td><td>identifier of the identifier entity (<code>xsd:anyURI</code>)</td><td>reference to the identifier entity of the described object (see <a href="#spec-identifiers">Identifying described objects</a>)</td></tr>
+    <tr><td><code>cpm:comment</code></td><td><code>xsd:string</code></td><td>arbitrary comment or additional information</td></tr>
+  </tbody>
+</table>
+
+<h4 id="attr-specforward">Specialized forward connector</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:specForwardConnector</code></td><td>type of the structure</td></tr>
+    <tr><td><code>cpm:referencedBundleId</code></td><td><code>xsd:anyURI</code></td><td>identifier of the finalized provenance component referenced by the connector</td></tr>
+    <tr><td><code>cpm:referencedBundleSpecV</code></td><td><code>xsd:string</code></td><td>specification of the CPM version used to represent the content of the referenced finalized provenance component, e.g. the <a href="#spec-version">identifier of this specification</a></td></tr>
+    <tr><td><code>cpm:referencedBundleHashValue</code></td><td><code>xsd:string</code></td><td>hash value of the finalized provenance component referenced by the connector</td></tr>
+    <tr><td><code>cpm:hashAlg</code></td><td><code>xsd:string</code></td><td>algorithm used to create the hash value</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleId</code></td><td><code>xsd:anyURI</code></td><td>identifier of the meta-component that contains the metadata of the respective finalized provenance component</td></tr>
+    <tr><td><code>cpm:referencedMetaBundleSpecV</code></td><td><code>xsd:string</code></td><td>specification of the CPM version used to represent the content of the referenced meta-component</td></tr>
+    <tr class="attrs-group"><th colspan="3">Optional</th></tr>
+    <tr><td><code>cpm:provenanceServiceUri</code></td><td><code>xsd:anyURI</code></td><td>URI of a service where the referenced finalized provenance component can be requested using its identifier</td></tr>
+    <tr><td><code>cpm:externalId</code></td><td><code>xsd:string</code></td><td>external identifier of the described object or described activity</td></tr>
+    <tr><td><code>cpm:hasId</code></td><td>identifier of the identifier entity (<code>xsd:anyURI</code>)</td><td>reference to the identifier entity of the described object (see <a href="#spec-identifiers">Identifying described objects</a>)</td></tr>
+    <tr><td><code>cpm:comment</code></td><td><code>xsd:string</code></td><td>arbitrary comment or additional information</td></tr>
+  </tbody>
+</table>
+
+<h4 id="attr-agents">Current agent, sender agent, and receiver agent</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:currentAgent</code>, <code>cpm:senderAgent</code>, or <code>cpm:receiverAgent</code></td><td>type of the structure</td></tr>
+    <tr><td><code>cpm:contactIdPid</code></td><td><code>xsd:anyURI</code></td><td>resolvable persistent identifier dereferencing to contact information of the organization represented by the agent</td></tr>
+    <tr class="attrs-group"><th colspan="3">Optional</th></tr>
+    <tr><td><code>cpm:externalId</code></td><td><code>xsd:string</code></td><td>external identifier of the described object or described activity</td></tr>
+    <tr><td><code>cpm:comment</code></td><td><code>xsd:string</code></td><td>arbitrary comment or additional information</td></tr>
+  </tbody>
+</table>
+
+<h4 id="attr-id">Identifier entity</h4>
+<table class="table attrs">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr class="attrs-group"><th colspan="3">Mandatory</th></tr>
+    <tr><td><code>prov:type</code></td><td><code>cpm:id</code></td><td>type of the structure</td></tr>
+    <tr><td><code>cpm:externalId</code></td><td><code>xsd:string</code></td><td>external identifier of the described object or described activity</td></tr>
+    <tr><td><code>cpm:externalIdType</code></td><td><code>xsd:string</code></td><td>type of the external identifier</td></tr>
+    <tr class="attrs-group"><th colspan="3">Optional</th></tr>
+    <tr><td><code>cpm:comment</code></td><td><code>xsd:string</code></td><td>arbitrary comment or additional information</td></tr>
+  </tbody>
+</table>
+
+<h2 id="spec-linking">Linking provenance components</h2>
+
+<h3 id="spec-backward">Backward traceability</h3>
+
+<p>Figure&nbsp;5 shows the connector attributes used for the backward traversal of the provenance chain. A described
+object provided by a sender to a receiver is represented in the sender's finalized provenance component as a forward
+connector and in the receiver's finalized provenance component as a backward connector with the same identifier.
+The attributes of the backward connector reference the sender's component.</p>
+
+<figure>
+  <img src="img/cpm-backward-connector-attributes.png" style="width: 100%; max-width: 953px" alt="A described object provided by a sender to a receiver. In the sender's component (sender:bundleId) it is represented as a forward connector (connector_id, prov:type cpm:forwardConnector); in the receiver's component (receiver:bundleId) it is represented as a backward connector with the same identifier and the attributes prov:type cpm:backwardConnector, cpm:referencedBundleId sender:bundleId, cpm:referencedMetaBundleId, cpm:referencedBundleHashValue, cpm:referencedBundleSpecV, cpm:referencedMetaBundleSpecV, and cpm:hashAlg.">
+  <figcaption>Figure 5. Connector attributes used for the backward traversal of the provenance chain.</figcaption>
+</figure>
+
+<h3 id="spec-forward">Forward traceability</h3>
+
+<p>Forward traceability is enabled by a forward link in the sender's finalized provenance component: a specialized
+forward connector (<code>cpm:specForwardConnector</code>) specializes the forward connector, and its attributes
+link to the receiver's finalized provenance component (Figure&nbsp;6).</p>
+<p>The specialized forward connector is optional, as the sender may not know the values of its attributes at the time
+of the finalization event, or at all. For example, a sender makes an open dataset available together with the
+respective finalized provenance component and does not know who uses the dataset. The receivers can still generate
+their finalized provenance components and connect them to the existing forward connector, which enables backward
+traceability. In addition, specialized forward connectors increase the complexity of managing the provenance
+components and create additional links to other components, which may be confidential.</p>
+
+<figure>
+  <img src="img/cpm-forward-connector-attributes.png" style="width: 100%; max-width: 1045px" alt="A described object provided from a sender to a receiver. In the sender's component (sender:bundleId) it is represented as a forward connector (connector_id, prov:type cpm:forwardConnector), specialized by connector_id2 with prov:type cpm:specForwardConnector and the attributes cpm:referencedBundleId receiver:bundleId, cpm:referencedMetaBundleId, cpm:referencedBundleHashValue, cpm:referencedBundleSpecV, cpm:referencedMetaBundleSpecV, and cpm:hashAlg. In the receiver's component (receiver:bundleId) it is represented as a backward connector with the same identifier connector_id and the corresponding attributes referencing sender:bundleId.">
+  <figcaption>Figure 6. Connector attributes used for the backward and forward traversal of the provenance chain.</figcaption>
+</figure>
+
+<h3 id="spec-redundancy">Redundant connectors</h3>
+
+<p>If a provenance component becomes unavailable, e.g. because its provenance controller ceases to exist or does
+not generate finalized provenance components, the links to it become invalid. CPM therefore allows linking
+components that describe non-adjacent activities through redundant connectors: one or more additional backward or
+specialized forward connectors in a finalized provenance component, connected to each other by derivation relations
+(Figure&nbsp;7). Each of these connectors is also present in an existing finalized provenance component, where it is
+used or generated by the corresponding main activity.</p>
+
+<figure>
+  <img src="img/cpm-redundant-connectors.jpg" style="width: 100%; max-width: 1007px" alt="Component y:bundle1. The main activity y:main (cpm:mainActivity) used the backward connector x:conn_1 and generated the forward connector y:conn_1, which was derived from x:conn_1. The backward connector x:conn_1 was derived from the backward connector w:conn_1, which was derived from the backward connector v:conn_1. The forward connector z:conn_1 was derived from y:conn_1, and the forward connector a:conn_1 was derived from z:conn_1.">
+  <figcaption>Figure 7. Traversal information with redundant connectors.</figcaption>
+</figure>
+
+<p><strong>Backward redundancy.</strong> When a subsequent component is added to the chain, the whole derivation
+chain of the backward connectors from which the linking forward connector was derived can be duplicated in the new
+component. No other connectors are duplicated. If a component disappears, the redundant backward connectors still
+link to the component preceding it.</p>
+
+<p><strong>Forward redundancy.</strong> When a component creates a forward link to a newly added component, this
+information can be propagated to the components linked to it, which can then add the corresponding redundant
+specialized forward connectors. The same procedure applies when a chain forks and when a preceding component is added.</p>
+
+<p>Redundant connectors are optional. The added redundancy increases the complexity of managing the provenance
+components and creates additional links to existing components, which may be confidential.</p>
+
+<h2 id="spec-rules">Summary of rules</h2>
+
+<p>Provenance components and traversal information:</p>
+<ul>
+  <li>Each provenance component contains a provenance graph according to PROV-DM, encapsulated in a PROV bundle
+    with a unique identifier and valid according to PROV-CONSTRAINTS.</li>
+  <li>Each finalized provenance component contains exactly one main activity, which should generate at least one
+    forward connector.</li>
+  <li>Finalized provenance components are linked by connectors: the receiver's component contains a backward connector
+    with the same identifier as the forward connector in the sender's component, and the attributes of the backward
+    connector link to the sender's component.</li>
+  <li>A finalized provenance component without a backward connector represents the beginning of a provenance chain
+    (e.g. sample acquisition).</li>
+  <li>The current agent is mandatory and is associated with the main activity.</li>
+  <li>Backward connectors, forward connectors, and specialized forward connectors are optional.</li>
+  <li>Redundant connectors are optional (see <a href="#spec-redundancy">Redundant connectors</a>).</li>
+  <li>Agents are mandatory if the corresponding connector is present: each backward connector is attributed to a
+    sender agent, and each specialized forward connector is attributed to a receiver agent.</li>
+  <li>A described object is represented by a PROV entity and should be identified as described in
+    <a href="#spec-identifiers">Identifying described objects</a>.</li>
+  <li>Each structure of the traversal information and each identifier entity contains its mandatory attributes, as
+    listed in <a href="#spec-attributes">Attributes of the CPM structures</a>.</li>
+</ul>
+<p>Domain-specific information:</p>
+<ul>
+  <li>is attached to the traversal information as described in
+    <a href="#spec-component">Structure of a provenance component</a>;</li>
+  <li>conforms to the requirements on provenance components;</li>
+  <li>does not contain any backward or forward connector, main activity, or sender, current, or receiver agent;</li>
+  <li>may add details about the main activity, e.g. sub-activities, intermediate or side products, or links to
+    external systems.</li>
+</ul>
+
+</div>
+<aside class="toc" aria-label="On this page"></aside>
+</main>
+<footer class="cpm-footer">
+  <style>
+    .cpm-footer { margin-top: 3rem; background: #f5f7f9; border-top: 1px solid #e3e6ea; color: #4a5562;
+                  font-family: "Lato", "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; line-height: 1.6; text-align: left; }
+    .cpm-footer-inner { max-width: 76rem; margin: 0 auto; padding: 2.25rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+                        display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; }
+    .cpm-footer .cpm-footer-brand { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 800; color: #1f3a5f; font-size: 1rem; margin: 0 0 0.3rem; }
+    .cpm-footer p { margin: 0 0 0.4rem; max-width: 34rem; }
+    .cpm-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem;
+                     font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 600; }
+    .cpm-footer li { margin: 0; background: none; }
+    .cpm-footer a { color: #1f3a5f; text-decoration: none; }
+    .cpm-footer a:hover { color: #b9561a; background: transparent; }
+    .cpm-footer .todo { background: #fff4ce; border: 1px dashed #e0c36a; padding: 0.1em 0.35em; border-radius: 3px; }
+    .cpm-footer .attention, .cpm-footer .attention a { color: #c0392b; }   /* to be reviewed */
+  </style>
+  <div class="cpm-footer-inner">
+    <div>
+      <p class="cpm-footer-brand">Common Provenance Model</p>
+      <p><a href="https://github.com/Common-Provenance-Framework">Common Provenance Framework on GitHub</a></p>
+      <p>Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      <p class="attention">Contact: <a href="mailto:Rudolf.wittner@bbmri-eric.eu">Rudolf.wittner@bbmri-eric.eu</a></p>
+    </div>
+    <ul>
+      <li><a href="/specification/">CPM specification</a></li>
+      <li><a href="/ontologies/">Ontologies</a></li>
+      <li><a href="/usage/">Usage</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

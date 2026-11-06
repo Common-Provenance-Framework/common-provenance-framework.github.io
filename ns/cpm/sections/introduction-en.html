@@ -1,0 +1,114 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<p>The Common Provenance Model Ontology (CPM-O) is the OWL&nbsp;2 representation of the terms of the
+<em>Common Provenance Model</em> (CPM). <p>The CPM is a domain-agnostic data model for representing provenance information.
+It directly supports the traceability of research objects in multi-organisational environments. The model
+serves as an extensible horizontal foundation that can be extended with domain- or scenario-specific
+information, such as information about sample handling, data generation, or data processing. It is standardized as ISO&nbsp;23494-2. The model supports:</p>
+<ul>
+  <li>interoperability of distributed provenance components and their interconnections;</li>
+  <li>confidentiality of sensitive information, and privacy;</li>
+  <li>extension with support for authenticity and non-repudiation of provenance.</li>
+</ul>
+
+<p>The primary purpose of CPM-O is to provide persistent IRIs, labels, and definitions for the CPM terms, so that
+they can be referenced from provenance documents in PROV-N, PROV-JSON, PROV-XML, or RDF. CPM-O extends the
+W3C PROV Ontology (PROV-O), which it imports: every CPM class is a subclass of a PROV-O class.</p>
+
+<!-- Optional figure: place the file in site/img/ and remove the comment markers.
+<figure>
+  <img src="img/cpm-overview.svg" style="width: 80%; max-width: 50em" alt="Overview of the CPM structures and their relation to PROV-O">
+  <figcaption>Figure 1. Overview of the CPM structures.</figcaption>
+</figure>
+-->
+
+<h3 id="intro-structures" class="list">CPM structures</h3>
+
+<p>CPM defines the following structures. Each is identified in PROV-N and PROV-JSON by a value of the
+<code>prov:type</code> attribute. In CPM-O each type value corresponds to a class (see
+<a href="#intro-usage">Using CPM terms</a>).</p>
+
+<table class="table">
+  <thead>
+    <tr><th>Class</th><th><code>prov:type</code> value</th><th>Subclass of</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>cpm:MainActivity</code></td><td><code>cpm:mainActivity</code></td><td><code>prov:Activity</code></td>
+        <td>a provenance structure that represents the described activity documented in a particular provenance component.</td></tr>
+    <tr><td><code>cpm:BackwardConnector</code></td><td><code>cpm:backwardConnector</code></td><td><code>prov:Entity</code></td>
+        <td>a connector that represents a received described object.</td></tr>
+    <tr><td><code>cpm:ForwardConnector</code></td><td><code>cpm:forwardConnector</code></td><td><code>prov:Entity</code></td>
+        <td>a connector that represents a described object that can be sent from a sender to a receiver.</td></tr>
+    <tr><td><code>cpm:ForwardConnectorSpecialized</code></td><td><code>cpm:specForwardConnector</code></td><td><code>prov:Entity</code></td>
+        <td>a connector that represents a described object that has been sent from a sender to a receiver.</td></tr>
+    <tr><td><code>cpm:IdentifierEntity</code></td><td><code>cpm:id</code></td><td><code>prov:Entity</code></td>
+        <td>a provenance structure that represents an external identifier.</td></tr>
+    <tr><td><code>cpm:CurrentAgent</code></td><td><code>cpm:currentAgent</code></td><td><code>prov:Organization</code></td>
+        <td>a provenance structure that represents a provenance controller.</td></tr>
+    <tr><td><code>cpm:SenderAgent</code></td><td><code>cpm:senderAgent</code></td><td><code>prov:Organization</code></td>
+        <td>a provenance structure that represents a sender in the context of passing a described object between two provenance controllers.</td></tr>
+    <tr><td><code>cpm:ReceiverAgent</code></td><td><code>cpm:receiverAgent</code></td><td><code>prov:Organization</code></td>
+        <td>a provenance structure that represents a receiver in the context of passing a described object between two provenance controllers.</td></tr>
+  </tbody>
+</table>
+
+<p>The CPM attributes (e.g. <code>cpm:referencedBundleId</code>, <code>cpm:hashAlg</code>,
+<code>cpm:contactIdPid</code>) are defined as datatype properties. Their definitions are listed in the
+<a href="#crossreference">cross-reference section</a>.</p>
+
+<h3 id="intro-usage" class="list">Using CPM terms</h3>
+
+<p>The following
+PROV-N example shows a backward connector and the sender agent to which it is attributed. All identifiers and
+values are illustrative.</p>
+
+<pre>
+document
+  prefix ex &lt;https://example.org/&gt;
+  prefix cpm &lt;https://www.commonprovenancemodel.org/ns/cpm#&gt;
+
+  entity(ex:bc1, [prov:type='cpm:backwardConnector',
+                  cpm:referencedBundleId="https://example.org/bundles/b0" %% xsd:anyURI,
+                  cpm:referencedMetaBundleId="https://example.org/meta/m0" %% xsd:anyURI,
+                  cpm:referencedBundleSpecV="ISO-IS-23494-2:2026",
+                  cpm:referencedMetaBundleSpecV="ISO-IS-23494-2:2026",
+                  cpm:referencedBundleHashValue="9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+                  cpm:hashAlg="SHA256"])
+  agent(ex:org1, [prov:type='cpm:senderAgent',
+                  cpm:contactIdPid="https://example.org/contacts/org1" %% xsd:anyURI])
+  wasAttributedTo(ex:bc1, ex:org1)
+endDocument
+</pre>
+
+<p>Following PROV-O, the <code>prov:type</code> attribute is expressed in RDF with <code>rdf:type</code>.
+Standard PROV tools therefore produce the following RDF from the example above (excerpt):</p>
+
+<pre>
+ex:bc1 a prov:Entity, cpm:backwardConnector ;
+    prov:wasAttributedTo ex:org1 ;
+    cpm:referencedBundleId "https://example.org/bundles/b0"^^xsd:anyURI ;
+    cpm:hashAlg "SHA256" .
+
+ex:org1 a prov:Agent, cpm:senderAgent ;
+    cpm:contactIdPid "https://example.org/contacts/org1"^^xsd:anyURI .
+</pre>
+
+<p>Please note:</p>
+<ul>
+  <li><strong>Identifier values.</strong> The values of <code>cpm:referencedBundleId</code>,
+    <code>cpm:referencedMetaBundleId</code>, <code>cpm:provenanceServiceUri</code>, <code>cpm:contactIdPid</code>, and
+    <code>cpm:hasId</code> are full IRIs given as literals of type <code>xsd:anyURI</code>, as in the
+    example above. Untyped strings are inconsistent with CPM-O.</li>
+</ul>
+
+<h3 id="intro-scope" class="list">Scope of this version</h3>
+
+<p>In this version, CPM-O serves primarily as a vocabulary: it declares the CPM classes and attributes, provides
+their definitions, and aligns them with PROV-O. Constraints for checking conformance to the CPM and further features are planned for future versions.</p>
+
+<h3 id="intro-issues" class="list">Known issues and feedback</h3>
+
+<p>Known defects of this version, related errata in ISO&nbsp;23494-2 and their workarounds are listed on the
+<a href="/ontologies/known-issues/">known issues</a> page.
+The development of the Common Provenance Framework takes place at
+<a href="https://github.com/Common-Provenance-Framework">https://github.com/Common-Provenance-Framework</a>.</p>

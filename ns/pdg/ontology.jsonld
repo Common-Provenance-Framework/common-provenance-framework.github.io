@@ -1,0 +1,279 @@
+[ {
+  "@id" : "_:genid1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#minCardinality" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+    "@value" : "1"
+  } ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.w3.org/ns/prov#startedAtTime"
+  } ]
+}, {
+  "@id" : "http://purl.org/dc/terms/abstract",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/dc/terms/created",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/dc/terms/description",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/dc/terms/license",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/dc/terms/title",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/vocab/vann/preferredNamespacePrefix",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/vocab/vann/preferredNamespaceUri",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://purl.org/vocab/vann/usageNote",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/2001/XMLSchema#date",
+  "@type" : [ "http://www.w3.org/2000/01/rdf-schema#Datatype" ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ],
+  "http://purl.org/dc/terms/abstract" : [ {
+    "@language" : "en",
+    "@value" : "The Provenance of Data Generation Ontology (PDG-O) expresses the Provenance of Data Generation (PDG) structures using the OWL 2 Web Ontology Language. The PDG structures are specializations of the provenance structures defined in W3C PROV-DM and are used together with the Common Provenance Model (CPM) to represent the provenance of data generation, such as the generated data, the data generation activities, and the devices, software, and other agents involved. PDG-O is an extension of PROV-O."
+  } ],
+  "http://purl.org/dc/terms/created" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#date",
+    "@value" : "2026-09-25"
+  } ],
+  "http://purl.org/dc/terms/description" : [ {
+    "@language" : "en",
+    "@value" : "PDG-O provides IRIs, labels, and definitions for the terms of the PDG structures, so that these terms can be referenced from provenance documents expressed in PROV-N, PROV-JSON, PROV-XML, or RDF. In this version the ontology serves primarily as a vocabulary: it declares the PDG classes and aligns them with PROV-O. The minimum cardinality restriction it contains documents the mandatory start time of data generation activities but, under the open-world semantics of OWL, it does not validate data. Constraints for checking conformance and further features are planned for future versions."
+  } ],
+  "http://purl.org/dc/terms/license" : [ {
+    "@id" : "http://creativecommons.org/licenses/by/4.0/"
+  } ],
+  "http://purl.org/dc/terms/title" : [ {
+    "@language" : "en",
+    "@value" : "Provenance of Data Generation Ontology (PDG-O)"
+  } ],
+  "http://purl.org/vocab/vann/preferredNamespacePrefix" : [ {
+    "@value" : "pdg"
+  } ],
+  "http://purl.org/vocab/vann/preferredNamespaceUri" : [ {
+    "@value" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Following PROV-O (Section 3.1), the PROV-DM attribute prov:type is expressed in RDF with rdf:type; PDG-O therefore does not declare prov:type. PROV-N, PROV-JSON, and PROV-XML keep prov:type unchanged, e.g. prov:type='pdg:data'. Each PDG type value (e.g. pdg:data) is declared as a class equivalent to the corresponding PDG-O class (e.g. pdg:Data), so RDF produced from PROV-N/PROV-JSON by standard PROV tooling is classified correctly. New RDF should use the capitalized class names."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/cpm#"
+  }, {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pbm#"
+  }, {
+    "@id" : "https://www.commonprovenancemodel.org/ontologies/known-issues/"
+  } ],
+  "http://www.w3.org/2002/07/owl#imports" : [ {
+    "@id" : "http://www.w3.org/ns/prov-o-20130430"
+  } ],
+  "http://www.w3.org/2002/07/owl#versionIRI" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg/1.0.0"
+  } ],
+  "http://www.w3.org/2002/07/owl#versionInfo" : [ {
+    "@language" : "en",
+    "@value" : "1.0.0"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#Data",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents data."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Data"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#data"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#DataGeneration",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "DataGeneration"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/prov#Activity"
+  }, {
+    "@id" : "_:genid1"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGeneration"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#DataGenerationDevice",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a device for data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "DataGenerationDevice"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/prov#Agent"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationDevice"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#DataGenerationOther",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents an agent for data generation different from software and device."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "DataGenerationOther"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/prov#Agent"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationOther"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#DataGenerationSW",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a software for data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "DataGenerationSW"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/prov#Agent"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationSW"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#data",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://purl.org/vocab/vann/usageNote" : [ {
+    "@language" : "en",
+    "@value" : "PDG type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='pdg:data'). Declared as a class equivalent to pdg:Data so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pdg:Data."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents data."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "data"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGeneration",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://purl.org/vocab/vann/usageNote" : [ {
+    "@language" : "en",
+    "@value" : "PDG type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='pdg:dataGeneration'). Declared as a class equivalent to pdg:DataGeneration so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pdg:DataGeneration."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "dataGeneration"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationDevice",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://purl.org/vocab/vann/usageNote" : [ {
+    "@language" : "en",
+    "@value" : "PDG type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='pdg:dataGenerationDevice'). Declared as a class equivalent to pdg:DataGenerationDevice so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pdg:DataGenerationDevice."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a device for data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "dataGenerationDevice"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationOther",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://purl.org/vocab/vann/usageNote" : [ {
+    "@language" : "en",
+    "@value" : "PDG type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='pdg:dataGenerationOther'). Declared as a class equivalent to pdg:DataGenerationOther so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pdg:DataGenerationOther."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents an agent for data generation different from software and device."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "dataGenerationOther"
+  } ]
+}, {
+  "@id" : "https://www.commonprovenancemodel.org/ns/pdg#dataGenerationSW",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://purl.org/vocab/vann/usageNote" : [ {
+    "@language" : "en",
+    "@value" : "PDG type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type='pdg:dataGenerationSW'). Declared as a class equivalent to pdg:DataGenerationSW so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pdg:DataGenerationSW."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "a provenance structure that represents a software for data generation."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://www.commonprovenancemodel.org/ns/pdg#"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "dataGenerationSW"
+  } ]
+} ]

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Known issues</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="cpm-header">
+<link rel="stylesheet" href="/assets/fonts.css">
+<a class="cpm-skip" href="#main">Skip to content</a>
+<nav class="cpm-nav" aria-label="Main">
+  <style>
+    .cpm-header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid #e3e6ea;
+                  -webkit-backdrop-filter: saturate(160%) blur(6px); backdrop-filter: saturate(160%) blur(6px);
+                  font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.5; text-align: left; }
+    .cpm-skip { position: absolute; left: -999px; top: 0.5rem; background: #1f3a5f; color: #fff; padding: 0.4rem 0.8rem; border-radius: 4px; }
+    .cpm-skip:focus { left: 0.5rem; }
+    .cpm-nav { max-width: 76rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); display: flex; flex-wrap: wrap;
+               align-items: center; gap: 0 1.6rem; min-height: 4rem; }
+    .cpm-nav a { color: #4a5562; text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 1.1rem 0 1rem;
+                 border-bottom: 2px solid transparent; }
+    .cpm-nav a:hover { color: #1f3a5f; background: transparent; }
+    .cpm-nav a[href]:hover { background: transparent; }  /* override WIDOCO's link hover highlight */
+    .cpm-nav a.cpm-top.active { color: #1c2530; border-bottom-color: #e8742a; }
+    .cpm-nav .cpm-brand { display: flex; align-items: center; gap: 0.65rem; margin-right: auto; padding: 0.6rem 0;
+                          border: 0; color: #1f3a5f; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
+    .cpm-nav .cpm-brand:hover { color: #1f3a5f; }
+    .cpm-nav .cpm-mark { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem;
+                         border-radius: 6px; background: #1f3a5f; color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+                         box-shadow: inset -4px -4px 0 #e8742a; }
+    /* dropdowns: open on hover (mouse), on keyboard focus, or by the caret button (touch) */
+    .cpm-nav .cpm-dd { position: relative; display: flex; align-items: center; }
+    .cpm-nav .cpm-caret { background: none; border: 0; color: #6b7682; cursor: pointer; font: inherit; font-size: 0.7em;
+                          padding: 0.25rem 0.15rem; margin: 0 0 0 0.2rem; line-height: 1; }
+    .cpm-nav .cpm-sub { position: absolute; top: calc(100% - 0.35rem); left: -0.9rem; min-width: 17rem; margin: 0; padding: 0.45rem 0;
+                        list-style: none; background: #ffffff; border: 1px solid #e3e6ea; border-radius: 6px;
+                        box-shadow: 0 10px 28px rgba(28, 37, 48, 0.12); text-align: left;
+                        visibility: hidden; opacity: 0; transform: translateY(4px);
+                        transition: opacity 0.15s, transform 0.15s, visibility 0s linear 0.3s; }
+    .cpm-nav .cpm-dd--end .cpm-sub { left: auto; right: -0.9rem; }   /* set by the script when the menu would leave the window */
+    .cpm-nav .cpm-dd:hover .cpm-sub, .cpm-nav .cpm-dd:focus-within .cpm-sub, .cpm-nav .cpm-dd.open .cpm-sub {
+                        visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+    .cpm-nav .cpm-sub li { margin: 0; padding: 0; list-style: none; background: none; }
+    .cpm-nav .cpm-sub a { display: block; color: #1c2530; font-weight: 600; font-size: 0.9rem; padding: 0.45rem 1rem; border: 0; white-space: nowrap; }
+    .cpm-nav .cpm-sub a[href]:hover, .cpm-nav .cpm-sub a:focus, .cpm-nav .cpm-sub a.active { background: #f5f7f9; color: #1f3a5f; }
+    .cpm-nav .cpm-sub a.active { box-shadow: inset 3px 0 0 #e8742a; }
+    .cpm-nav .cpm-sub small { display: block; color: #6b7682; font-weight: 400; font-size: 0.8rem; }
+    @media (max-width: 48rem) {
+      .cpm-nav { gap: 0 1.1rem; }
+      .cpm-nav .cpm-brand { flex-basis: 100%; }
+      .cpm-nav a { padding: 0.5rem 0 0.6rem; }
+    }
+  </style>
+  <a class="cpm-brand" href="/"><span class="cpm-mark" aria-hidden="true">CPM</span>Common Provenance Model</a>
+  <a class="cpm-top cpm-home" href="/">Home</a>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/specification/">CPM specification</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="CPM specification sections">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/specification/#spec-terminology">Terminology</a></li>
+      <li><a href="/specification/#spec-chain">Provenance chains</a></li>
+      <li><a href="/specification/#spec-component">Structure of a provenance component</a></li>
+      <li><a href="/specification/#spec-linking">Linking provenance components</a></li>
+      <li><a href="/specification/#spec-rules">Summary of rules</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/ontologies/">Ontologies</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Ontologies">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/ns/cpm/">CPM-O<small>Common Provenance Model Ontology</small></a></li>
+      <li><a href="/ns/pbm/">PBM-O<small>Provenance of Biological Material Ontology</small></a></li>
+      <li><a href="/ns/pdg/">PDG-O<small>Provenance of Data Generation Ontology</small></a></li>
+      <li><a href="/ontologies/known-issues/">Known issues</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/usage/">Usage</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="Usage">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/usage/traversal/">Traversal algorithm</a></li>
+      <li><a href="/usage/examples/">Examples</a></li>
+    </ul>
+  </div>
+  <div class="cpm-dd">
+    <a class="cpm-top" href="/about/">About</a>
+    <button type="button" class="cpm-caret" aria-expanded="false" aria-label="About">&#9662;</button>
+    <ul class="cpm-sub">
+      <li><a href="/about/">Acknowledgements</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      function mark(sel) { document.querySelectorAll(sel).forEach(function (a) { a.classList.add("active"); }); }
+      // active top-level tab
+      if (p === "/" || p === "/index.html") { mark('.cpm-nav a.cpm-home'); }
+      var map = { "/specification/": "/specification/", "/ontologies/": "/ontologies/", "/ns/": "/ontologies/", "/usage/": "/usage/", "/about/": "/about/" };
+      Object.keys(map).forEach(function (k) {
+        if (p.indexOf(k) === 0) { mark('.cpm-nav a.cpm-top[href="' + map[k] + '"]'); }
+      });
+      // current ontology in the dropdown
+      ["/ns/cpm/", "/ns/pbm/", "/ns/pdg/", "/usage/traversal/", "/usage/examples/",
+       "/about/materials/", "/about/roadmap/", "/about/adoption/", "/ontologies/known-issues/"].forEach(function (k) {
+        if (p.indexOf(k) === 0 || p === k.slice(0, -1)) { mark('.cpm-nav .cpm-sub a[href="' + k + '"]'); }
+      });
+      if (p === "/about/" || p === "/about/index.html") { mark('.cpm-nav .cpm-sub a[href="/about/"]'); }
+      // on-page table of contents: filled from the h2/h3 headings of .content into aside.toc
+      document.addEventListener("DOMContentLoaded", function () {
+        var aside = document.querySelector("aside.toc"), content = document.querySelector(".content");
+        if (!aside || !content) { return; }
+        var hs = content.querySelectorAll("h2[id], h3[id]"), links = [];
+        if (!hs.length) { return; }
+        var title = document.createElement("p"); title.className = "toc-title"; title.textContent = "On this page";
+        var root = document.createElement("ol"), sub = null;
+        hs.forEach(function (h) {
+          var li = document.createElement("li"), a = document.createElement("a");
+          a.href = "#" + h.id; a.textContent = h.textContent; li.appendChild(a); links.push([h, a]);
+          if (h.tagName === "H2") { root.appendChild(li); sub = null; }
+          else { if (!sub) { sub = document.createElement("ol"); (root.lastElementChild || root).appendChild(sub); } sub.appendChild(li); }
+        });
+        aside.appendChild(title); aside.appendChild(root);
+        function spy() {
+          var cur = links[0];
+          links.forEach(function (x) { if (x[0].getBoundingClientRect().top < 120) { cur = x; } });
+          links.forEach(function (x) { x[1].classList.toggle("active", x === cur); });
+        }
+        window.addEventListener("scroll", spy, { passive: true }); spy();
+      });
+      // caret buttons: toggle on click/tap; close on outside click or Escape
+      var dds = document.querySelectorAll(".cpm-nav .cpm-dd");
+      function closeAll(except) {
+        dds.forEach(function (d) { if (d !== except) { d.classList.remove("open");
+          d.querySelector(".cpm-caret").setAttribute("aria-expanded", "false"); } });
+      }
+      // a dropdown that would extend past the right edge of the window opens to the left instead
+      function fit(d) {
+        d.classList.remove("cpm-dd--end");
+        var r = d.querySelector(".cpm-sub").getBoundingClientRect();
+        if (r.right > document.documentElement.clientWidth - 8) { d.classList.add("cpm-dd--end"); }
+      }
+      dds.forEach(function (d) {
+        var b = d.querySelector(".cpm-caret");
+        d.addEventListener("mouseenter", function () { fit(d); });
+        d.addEventListener("focusin", function () { fit(d); });
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          fit(d);
+          var open = !d.classList.contains("open");
+          closeAll(d);
+          d.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      });
+      // also on load and resize: a hidden menu that extends past the window would otherwise widen the page
+      function fitAll() { dds.forEach(fit); }
+      fitAll();
+      window.addEventListener("resize", fitAll);
+      document.addEventListener("click", function () { closeAll(null); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeAll(null); if (document.activeElement && document.activeElement.closest(".cpm-dd")) { document.activeElement.blur(); } }
+      });
+    })();
+  </script>
+</nav>
+</header>
+
+<main class="page page--toc" id="main">
+<div class="content">
+<h1>Known issues</h1>
+<p class="lead">Known defects and limitations of the ontologies, the recommended workarounds, and the planned
+fixes.</p>
+
+<h2 id="cpm-o">CPM-O 1.0.0</h2>
+<p>Common Provenance Model Ontology (<a href="/ns/cpm/">CPM-O</a>) 1.0.0, namespace
+<code>https://www.commonprovenancemodel.org/ns/cpm#</code>.</p>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Summary</th><th>Affects</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><a href="#ki-1">KI-1</a></td><td>Each CPM type has two IRIs: the lower-case type value and the capitalized class</td><td>CPM-O 1.0.0</td><td>Fix planned in the next revision of the CPM specification</td></tr>
+    <tr><td><a href="#ki-2">KI-2</a></td><td>Identifier values must be typed <code>xsd:anyURI</code></td><td>CPM-O 1.0.0</td><td>Documented behaviour</td></tr>
+    <tr><td><a href="#ki-3">KI-3</a></td><td>CPM-O together with its PROV-O import is not OWL&nbsp;2 DL</td><td>PROV-O (imported)</td><td>Cannot be fixed in CPM-O</td></tr>
+    <tr><td><a href="#ki-4">KI-4</a></td><td>Class restrictions do not validate data</td><td>CPM-O 1.0.0</td><td>Validation planned for a future version</td></tr>
+  </tbody>
+</table>
+
+<h3 id="ki-1">KI-1: Each CPM type has two IRIs</h3>
+<p><strong>Description.</strong></p>
+<ul>
+  <li>In PROV-N and PROV-JSON, ISO&nbsp;23494-2 writes CPM types with lower-case values, e.g. <code>prov:type='cpm:forwardConnector'</code>.</li>
+  <li>By OWL convention, CPM-O names its classes with a capital letter, e.g. <code>cpm:ForwardConnector</code>.</li>
+  <li>To serve both, CPM-O 1.0.0 declares every lower-case type value as a class equivalent
+    (<code>owl:equivalentClass</code>) to the capitalized class.</li>
+  <li>As a result, each concept appears twice in the documentation.</li>
+</ul>
+<table class="table">
+  <thead><tr><th>Type value</th><th>Class</th></tr></thead>
+  <tbody>
+    <tr><td><code>backwardConnector</code></td><td><code>BackwardConnector</code></td></tr>
+    <tr><td><code>forwardConnector</code></td><td><code>ForwardConnector</code></td></tr>
+    <tr><td><code>specForwardConnector</code></td><td><code>ForwardConnectorSpecialized</code></td></tr>
+    <tr><td><code>id</code></td><td><code>IdentifierEntity</code></td></tr>
+    <tr><td><code>mainActivity</code></td><td><code>MainActivity</code></td></tr>
+    <tr><td><code>currentAgent</code></td><td><code>CurrentAgent</code></td></tr>
+    <tr><td><code>senderAgent</code></td><td><code>SenderAgent</code></td></tr>
+    <tr><td><code>receiverAgent</code></td><td><code>ReceiverAgent</code></td></tr>
+  </tbody>
+</table>
+<p><strong>Workaround.</strong> Always prefer the capitalized class names:</p>
+<ul>
+  <li><strong>PROV-N, PROV-JSON, PROV-XML:</strong> use the capitalized names as type values, e.g.
+    <code>prov:type='cpm:ForwardConnector'</code>.</li>
+  <li><strong>RDF:</strong> use the capitalized classes, e.g. <code>cpm:ForwardConnector</code>.</li>
+</ul>
+<p>The lower-case values remain valid, because CPM-O declares them as classes equivalent to the capitalized
+classes.</p>
+<p><strong>Planned fix.</strong> The next revision of the CPM specification is to use the capitalized class names
+as type values. The lower-case IRIs will then be marked <code>owl:deprecated</code>, not
+removed, so that existing data stays valid.</p>
+
+<h3 id="ki-2">KI-2: Identifier values must be typed <code>xsd:anyURI</code></h3>
+<p><strong>Description.</strong> The range of the following properties is <code>xsd:anyURI</code>:
+<code>cpm:referencedBundleId</code>, <code>cpm:referencedMetaBundleId</code>, <code>cpm:provenanceServiceUri</code>,
+<code>cpm:contactIdPid</code>, and <code>cpm:hasId</code>. If a value is written as an untyped string, it becomes
+<code>xsd:string</code> in RDF. The <code>xsd:string</code> and <code>xsd:anyURI</code> value spaces are disjoint, so
+the data becomes logically inconsistent with CPM-O. A qualified-name value (<code>'ex:b0'</code>) becomes an IRI node
+in RDF, which also conflicts with the declared datatype properties.</p>
+<p><strong>Workaround.</strong> Always write these values typed:</p>
+<pre>
+PROV-N:    cpm:referencedBundleId="https://example.org/bundles/b0" %% xsd:anyURI
+PROV-JSON: "cpm:referencedBundleId": {"$": "https://example.org/bundles/b0", "type": "xsd:anyURI"}
+</pre>
+
+<h3 id="ki-3">KI-3: CPM-O with its PROV-O import is not OWL&nbsp;2 DL</h3>
+<p><strong>Description.</strong> PROV-O (<code>http://www.w3.org/ns/prov-o-20130430</code>) declares
+<code>prov:specializationOf</code> and <code>prov:wasRevisionOf</code> both as <code>owl:AnnotationProperty</code>
+and as <code>owl:ObjectProperty</code>. OWL&nbsp;2 DL does not allow a property to be both. Any ontology that imports
+PROV-O unchanged, including CPM-O, therefore falls outside OWL&nbsp;2 DL. CPM-O's own axioms are OWL&nbsp;2 DL.</p>
+<p><strong>Workaround.</strong> None is needed in practice. Common reasoners, e.g. HermiT, process the ontology
+without problems.</p>
+<p><strong>Status.</strong> Cannot be fixed in CPM-O without copying and modifying PROV-O, and CPM-O deliberately
+imports PROV-O rather than copying it.</p>
+
+<h3 id="ki-4">KI-4: Class restrictions do not validate data</h3>
+<p><strong>Description.</strong> The <code>owl:minCardinality</code> restrictions document which attributes the CPM
+requires. OWL, however, assumes that missing information may exist elsewhere (open-world semantics). A resource that
+lacks a required attribute is therefore not reported as an error.</p>
+<p><strong>Workaround.</strong> Check conformance to the CPM outside the ontology, e.g. with the CPM software
+libraries.</p>
+<p><strong>Planned fix.</strong> A future version will provide validation constraints, e.g. exact cardinalities and
+SHACL shapes.</p>
+
+<h2 id="pbm-pdg">PBM-O and PDG-O</h2>
+<p>No known issues are recorded for <a href="/ns/pbm/">PBM-O</a> and <a href="/ns/pdg/">PDG-O</a>.</p>
+</div>
+<aside class="toc" aria-label="On this page"></aside>
+</main>
+<footer class="cpm-footer">
+  <style>
+    .cpm-footer { margin-top: 3rem; background: #f5f7f9; border-top: 1px solid #e3e6ea; color: #4a5562;
+                  font-family: "Lato", "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; line-height: 1.6; text-align: left; }
+    .cpm-footer-inner { max-width: 76rem; margin: 0 auto; padding: 2.25rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+                        display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; }
+    .cpm-footer .cpm-footer-brand { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 800; color: #1f3a5f; font-size: 1rem; margin: 0 0 0.3rem; }
+    .cpm-footer p { margin: 0 0 0.4rem; max-width: 34rem; }
+    .cpm-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem;
+                     font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 600; }
+    .cpm-footer li { margin: 0; background: none; }
+    .cpm-footer a { color: #1f3a5f; text-decoration: none; }
+    .cpm-footer a:hover { color: #b9561a; background: transparent; }
+    .cpm-footer .todo { background: #fff4ce; border: 1px dashed #e0c36a; padding: 0.1em 0.35em; border-radius: 3px; }
+    .cpm-footer .attention, .cpm-footer .attention a { color: #c0392b; }   /* to be reviewed */
+  </style>
+  <div class="cpm-footer-inner">
+    <div>
+      <p class="cpm-footer-brand">Common Provenance Model</p>
+      <p><a href="https://github.com/Common-Provenance-Framework">Common Provenance Framework on GitHub</a></p>
+      <p>Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      <p class="attention">Contact: <a href="mailto:Rudolf.wittner@bbmri-eric.eu">Rudolf.wittner@bbmri-eric.eu</a></p>
+    </div>
+    <ul>
+      <li><a href="/specification/">CPM specification</a></li>
+      <li><a href="/ontologies/">Ontologies</a></li>
+      <li><a href="/usage/">Usage</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/about/materials/">Further materials</a></li>
+      <li><a href="/about/roadmap/">Roadmap</a></li>
+      <li><a href="/about/adoption/">Adoption</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

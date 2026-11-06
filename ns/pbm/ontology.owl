@@ -1,0 +1,499 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://www.commonprovenancemodel.org/ns/pbm#"
+     xml:base="https://www.commonprovenancemodel.org/ns/pbm"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="https://www.commonprovenancemodel.org/ns/pbm#">
+        <owl:versionIRI rdf:resource="https://www.commonprovenancemodel.org/ns/pbm/1.0.0"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/prov-o-20130430"/>
+        <terms:abstract xml:lang="en">The Provenance of Biological Material Ontology (PBM-O) expresses the Provenance of Biological Material (PBM) structures using the OWL 2 Web Ontology Language. The PBM structures are specializations of the provenance structures defined in W3C PROV-DM and are used together with the Common Provenance Model (CPM) to represent the provenance of biological material, such as samples and the activities performed on them. PBM-O is an extension of PROV-O.</terms:abstract>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-25</terms:created>
+        <terms:description xml:lang="en">PBM-O provides IRIs, labels, and definitions for the terms of the PBM structures, so that these terms can be referenced from provenance documents expressed in PROV-N, PROV-JSON, PROV-XML, or RDF. In this version the ontology serves primarily as a vocabulary: it declares the PBM classes and aligns them with PROV-O. The minimum cardinality restrictions it contains document mandatory properties of the PBM structures but, under the open-world semantics of OWL, they do not validate data. Constraints for checking conformance and further features are planned for future versions.</terms:description>
+        <terms:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+        <terms:title xml:lang="en">Provenance of Biological Material Ontology (PBM-O)</terms:title>
+        <vann:preferredNamespacePrefix>pbm</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri>https://www.commonprovenancemodel.org/ns/pbm#</vann:preferredNamespaceUri>
+        <rdfs:comment xml:lang="en">Following PROV-O (Section 3.1), the PROV-DM attribute prov:type is expressed in RDF with rdf:type; PBM-O therefore does not declare prov:type. PROV-N, PROV-JSON, and PROV-XML keep prov:type unchanged, e.g. prov:type=&apos;pbm:sample&apos;. Each PBM type value (e.g. pbm:sample) is declared as a class equivalent to the corresponding PBM-O class (e.g. pbm:Sample), so RDF produced from PROV-N/PROV-JSON by standard PROV tooling is classified correctly. New RDF should use the capitalized class names.</rdfs:comment>
+        <rdfs:seeAlso rdf:resource="https://www.commonprovenancemodel.org/ns/cpm#"/>
+        <rdfs:seeAlso rdf:resource="https://www.commonprovenancemodel.org/ontologies/known-issues/"/>
+        <owl:versionInfo xml:lang="en">1.0.0</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://purl.org/dc/terms/abstract -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/abstract"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/usageNote -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/usageNote"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Acquisition -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Acquisition">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#acquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#endedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the acquisition of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Acquisition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Container -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Container">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#container"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Collection"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a container.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Container</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Distribution -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Distribution">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#distribution"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the distribution or disposal of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Distribution</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Processing -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Processing">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#processing"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the processing of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Processing</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#ProcessingDevice -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#ProcessingDevice">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#processingDevice"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a device for sample processing.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">ProcessingDevice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Reception -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Reception">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#reception"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the reception of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Reception</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Retrieval -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Retrieval">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#retrieval"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the retrieval of a sample from sample storage.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Retrieval</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#SOP -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#SOP">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#sop"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a standard operating procedure.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">SOP</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Sample -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Sample">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#sample"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Sample</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Source -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Source">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#source"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a source of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Source</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Storage -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Storage">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#storage"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the storage of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Storage</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#StorageDevice -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#StorageDevice">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#storageDevice"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a device for sample storage.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">StorageDevice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#Transport -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#Transport">
+        <owl:equivalentClass rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#transport"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#startedAtTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the transport of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">Transport</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#acquisition -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#acquisition">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:acquisition&apos;). Declared as a class equivalent to pbm:Acquisition so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Acquisition.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the acquisition of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">acquisition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#container -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#container">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:container&apos;). Declared as a class equivalent to pbm:Container so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Container.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a container.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">container</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#distribution -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#distribution">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:distribution&apos;). Declared as a class equivalent to pbm:Distribution so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Distribution.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the distribution or disposal of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">distribution</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#processing -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#processing">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:processing&apos;). Declared as a class equivalent to pbm:Processing so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Processing.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the processing of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">processing</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#processingDevice -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#processingDevice">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:processingDevice&apos;). Declared as a class equivalent to pbm:ProcessingDevice so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:ProcessingDevice.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a device for sample processing.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">processingDevice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#reception -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#reception">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:reception&apos;). Declared as a class equivalent to pbm:Reception so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Reception.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the reception of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">reception</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#retrieval -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#retrieval">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:retrieval&apos;). Declared as a class equivalent to pbm:Retrieval so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Retrieval.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the retrieval of a sample from sample storage.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">retrieval</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#sample -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#sample">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:sample&apos;). Declared as a class equivalent to pbm:Sample so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Sample.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">sample</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#sop -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#sop">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:sop&apos;). Declared as a class equivalent to pbm:SOP so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:SOP.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a standard operating procedure.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">sop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#source -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#source">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:source&apos;). Declared as a class equivalent to pbm:Source so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Source.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a source of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">source</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#storage -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#storage">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:storage&apos;). Declared as a class equivalent to pbm:Storage so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Storage.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the storage of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">storage</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#storageDevice -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#storageDevice">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:storageDevice&apos;). Declared as a class equivalent to pbm:StorageDevice so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:StorageDevice.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents a device for sample storage.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">storageDevice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.commonprovenancemodel.org/ns/pbm#transport -->
+
+
+    <owl:Class rdf:about="https://www.commonprovenancemodel.org/ns/pbm#transport">
+        <vann:usageNote xml:lang="en">PBM type value used with prov:type in PROV-N/PROV-JSON/PROV-XML (prov:type=&apos;pbm:transport&apos;). Declared as a class equivalent to pbm:Transport so that the rdf:type triple produced from prov:type by the PROV-O mapping is classified as pbm:Transport.</vann:usageNote>
+        <rdfs:comment xml:lang="en">a provenance structure that represents the transport of a sample.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://www.commonprovenancemodel.org/ns/pbm#"/>
+        <rdfs:label xml:lang="en">transport</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/ -->
+
+

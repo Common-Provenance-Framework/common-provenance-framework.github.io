@@ -1,0 +1,87 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<p>The Provenance of Data Generation Ontology (PDG-O) is the OWL&nbsp;2 representation of the
+<em>Provenance of Data Generation</em> (PDG) structures. The PDG structures are specializations of the
+provenance structures defined in W3C PROV-DM and describe data generation: the generated data, the data generation
+activities, and the devices, software, and other agents involved. They are used together with the Common Provenance
+Model (CPM), whose terms are defined in <a href="/ns/cpm/">CPM-O</a>.</p>
+
+<p>The primary purpose of PDG-O is to provide stable IRIs, labels, and definitions for the PDG terms, so that
+they can be referenced from provenance documents in PROV-N, PROV-JSON, PROV-XML, or RDF. PDG-O extends the
+W3C PROV Ontology (PROV-O), which it imports: every PDG class is a subclass of a PROV-O class.</p>
+
+<h3 id="intro-structures" class="list">PDG structures</h3>
+
+<p>Each structure is identified in PROV-N and PROV-JSON by a value of the <code>prov:type</code> attribute. In PDG-O
+each type value corresponds to a class (see <a href="#intro-usage">Using PDG terms</a>).</p>
+
+<table class="table">
+  <thead>
+    <tr><th>Class</th><th><code>prov:type</code> value</th><th>Subclass of</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>pdg:Data</code></td><td><code>pdg:data</code></td><td><code>prov:Entity</code></td><td>a provenance structure that represents data.</td></tr>
+    <tr><td><code>pdg:DataGeneration</code></td><td><code>pdg:dataGeneration</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents a data generation.</td></tr>
+    <tr><td><code>pdg:DataGenerationDevice</code></td><td><code>pdg:dataGenerationDevice</code></td><td><code>prov:Agent</code></td><td>a provenance structure that represents a device for data generation.</td></tr>
+    <tr><td><code>pdg:DataGenerationSW</code></td><td><code>pdg:dataGenerationSW</code></td><td><code>prov:Agent</code></td><td>a provenance structure that represents a software for data generation.</td></tr>
+    <tr><td><code>pdg:DataGenerationOther</code></td><td><code>pdg:dataGenerationOther</code></td><td><code>prov:Agent</code></td><td>a provenance structure that represents an agent for data generation different from software and device.</td></tr>
+  </tbody>
+</table>
+
+<h3 id="intro-usage" class="list">Using PDG terms</h3>
+
+<p>The following PROV-N example shows a data generation activity that generates data using a device and software.
+All identifiers and values are illustrative.</p>
+
+<pre>
+document
+  prefix ex &lt;https://example.org/&gt;
+  prefix pdg &lt;https://www.commonprovenancemodel.org/ns/pdg#&gt;
+
+  activity(ex:sequencing1, 2026-09-12T09:00:00Z, -, [prov:type='pdg:dataGeneration'])
+  entity(ex:reads1, [prov:type='pdg:data'])
+  agent(ex:sequencer1, [prov:type='pdg:dataGenerationDevice'])
+  agent(ex:basecaller1, [prov:type='pdg:dataGenerationSW'])
+  wasGeneratedBy(ex:reads1, ex:sequencing1, -)
+  wasAssociatedWith(ex:sequencing1, ex:sequencer1, -)
+  wasAssociatedWith(ex:sequencing1, ex:basecaller1, -)
+endDocument
+</pre>
+
+<p>Following PROV-O, the <code>prov:type</code> attribute is expressed in RDF with <code>rdf:type</code>.
+Standard PROV tools therefore produce the following RDF from the example above (excerpt):</p>
+
+<pre>
+ex:sequencing1 a prov:Activity, pdg:dataGeneration ;
+    prov:startedAtTime "2026-09-12T09:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:sequencer1, ex:basecaller1 .
+
+ex:reads1 a prov:Entity, pdg:data ;
+    prov:wasGeneratedBy ex:sequencing1 .
+
+ex:sequencer1 a prov:Agent, pdg:dataGenerationDevice .
+
+ex:basecaller1 a prov:Agent, pdg:dataGenerationSW .
+</pre>
+
+<p>Please note:</p>
+<ul>
+  <li><strong>Type values and classes.</strong> The PDG structures use lower-case type values
+    (e.g. <code>pdg:data</code>), while PDG-O names its classes with a capital letter (e.g. <code>pdg:Data</code>).
+    As in CPM-O, each type value is declared as a class equivalent to the corresponding PDG-O class, so RDF produced
+    from PROV-N or PROV-JSON is classified correctly.</li>
+</ul>
+
+<h3 id="intro-scope" class="list">Scope of this version</h3>
+
+<p>In this version, PDG-O serves primarily as a vocabulary: it declares the PDG classes, provides their definitions,
+and aligns them with PROV-O. The minimum cardinality restriction documents the mandatory start time of data
+generation activities but, under the open-world semantics of OWL, it does not validate data. Constraints for
+checking conformance and further features are planned for future versions.</p>
+
+<h3 id="intro-issues" class="list">Known issues and feedback</h3>
+
+<p>Known defects of this version and their workarounds are listed on the
+<a href="/ontologies/known-issues/">known issues</a> page.
+The development of the Common Provenance Framework takes place at
+<a href="https://github.com/Common-Provenance-Framework">https://github.com/Common-Provenance-Framework</a>.</p>

@@ -1,0 +1,103 @@
+/* Theme layer for the WIDOCO ontology pages (/ns/cpm/, /ns/pbm/, /ns/pdg/).
+   Injected by build-site.ps1 as the last stylesheet of each WIDOCO page. It keeps the standard WIDOCO
+   structure (metadata block, table of contents, cross-reference section) and only adapts the look to the site.
+   Selectors refer to the WIDOCO 1.4.x templates (rec.css, primer.css, extra.css, owl.css). */
+@import url("fonts.css");
+
+/* the site pages have no dark mode: use WIDOCO's light values, recoloured, also when the OS prefers dark */
+:root {
+  color-scheme: light;
+  --bg-status-box: #1f3a5f;
+  --background-color: #ffffff;
+  --border: #e3e6ea;
+  --htag-text: #1f3a5f;
+  --bg-backlink: #ffffff;
+  --text-backlink: #6b7682;
+  --text-color: #1c2530;
+  --shadow-color: rgba(28, 37, 48, 0.1);
+  --accent-color: #e8742a;
+  --owl-bg: #f5f7f9;
+  --owl-bg-pre: #f5f7f9;
+  --link: #1d5fa6;
+  --link-visited: #1d5fa6;
+  --link-active: #b9561a;
+  --href-hover: transparent;
+  --bg-hlist: #f5f7f9;
+  --bg-description: #f5f7f9;
+  --literal: #2f7d32;
+  --type-ap: #a33a3a;
+  --type-op: #1d5fa6;
+  --type-dp: #2f7d32;
+  --type-ni: #8a5a2b;
+}
+.darkmode { display: none; }   /* WIDOCO dark-mode toggle */
+
+html { scroll-padding-top: 5rem; }
+body { padding: 0 !important; margin: 0; background: #ffffff; color: #1c2530;
+       font-family: "Lato", "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.65; text-align: left; }
+body > .container { max-width: 76rem; margin: 0 auto; padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 3rem; }
+p, li, dd { max-width: 52rem; }
+a:link, a:visited { color: #1d5fa6; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: #b9561a; background: transparent !important; }
+
+/* headings */
+h1, h2, h3, h4, h5, h6 { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif !important; color: #1f3a5f; background: transparent; line-height: 1.2; }
+h1 { font-size: clamp(2rem, 4vw, 2.75rem) !important; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
+div.head h1 { margin-top: 0; }
+div.head h2 { font-size: 1.05rem !important; font-weight: 600; color: #6b7682; margin: 0 0 1.5rem; padding-top: 0; border-top: 0; }
+h2 { font-size: 1.6rem !important; font-weight: 700; letter-spacing: -0.01em; margin: 3rem 0 0.75rem; padding-top: 1.25rem; border-top: 1px solid #e3e6ea; }
+h3 { font-size: 1.2rem !important; font-weight: 700; border-bottom: 0; }
+h2.list::before, h3.list::before { color: #6b7682; font-weight: 600; }
+
+/* metadata block */
+div.head dl { box-sizing: border-box; max-width: 100%; display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.35rem 1rem; margin: 0 0 1rem;
+              padding: 1.1rem 1.25rem; background: #f5f7f9; border: 1px solid #e3e6ea; border-radius: 4px; }
+div.head dt { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-weight: 700; color: #4a5562; grid-column: 1; }
+div.head dd { grid-column: 2; margin: 0; line-height: 1.5; min-width: 0; overflow-wrap: anywhere; }
+div.head dt + dd { margin-top: 0; }
+div.head > div[style*="float:right"] { font-size: 0.85rem; color: #6b7682; }
+div.head hr { border: 0; border-top: 1px solid #e3e6ea; margin: 1.5rem 0 0; }
+
+/* table of contents */
+#toc { background: #f5f7f9; border: 1px solid #e3e6ea; border-radius: 4px; padding: 0.5rem 1.5rem 1rem; margin: 2rem 0; }
+#toc h2 { border-top: 0; margin: 0.75rem 0 0.5rem; padding-top: 0; font-size: 1.1rem !important; }
+#toc ul { list-style: none; padding-left: 0; margin: 0; }
+#toc ul ul { padding-left: 1.4rem; }
+#toc li { margin: 0.15rem 0; font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-size: 0.95rem; }
+
+/* back-to-ToC links */
+.backlink { float: right; font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; font-size: 0.75rem !important; font-weight: 600;
+            border: 1px solid #e3e6ea !important; border-radius: 999px; padding: 0.1rem 0.6rem !important; color: #6b7682 !important; background: #fff !important; }
+
+/* tables (namespace declarations, custom sections) */
+table { border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+th, td { font-family: "Lato", "Helvetica Neue", Arial, sans-serif; border-bottom: 1px solid #e3e6ea; padding: 0.45rem 0.75rem; text-align: left; vertical-align: top; }
+th { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; background: #f5f7f9; border-bottom: 2px solid #c9ced4; }
+caption { caption-side: bottom; font-size: 0.85rem; color: #6b7682; padding-top: 0.5rem; }
+#ns { text-align: left !important; }
+
+/* cross-reference section */
+.hlist { border: 1px solid #e3e6ea !important; border-radius: 4px; padding: 0.6rem 0.9rem !important; background: #f5f7f9; }
+.hlist li { padding: 0.1rem 1rem 0.1rem 0 !important; font-size: 0.95rem; }
+.entity { border: 1px solid #e3e6ea !important; border-radius: 4px; padding: 0.9rem 1.1rem !important; margin: 1rem 0 !important; }
+.entity h3 { margin-top: 0; }
+.entity > p > strong, .entity .type-c, .entity .type-op, .entity .type-dp, .entity .type-ap, .entity .type-ni { font-family: "Overpass", "Helvetica Neue", Arial, sans-serif; }
+.description { box-sizing: border-box; border: 0 !important; border-left: 3px solid #e8742a !important; border-radius: 0 4px 4px 0; padding: 0.5rem 0.9rem !important; }
+.description dl, .description { background: #f5f7f9 !important; }
+code, pre { font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.875em; }
+pre { background: #f5f7f9; border: 1px solid #e3e6ea; border-radius: 4px; padding: 0.9rem 1rem; overflow-x: auto; margin-left: 0; }
+
+/* figures in the custom sections */
+img { max-width: 100%; height: auto; }
+.imageblock img { border: 0; }
+figcaption, .caption { font-size: 0.875rem; color: #6b7682; }
+
+@media (max-width: 40rem) {
+  div.head dl { grid-template-columns: minmax(0, 1fr); }
+  div.head dt, div.head dd { grid-column: 1; }
+  body > .container a { overflow-wrap: anywhere; }
+}
+
+/* narrow screens: wide tables scroll horizontally instead of widening the page */
+@media (max-width: 48rem) { table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; } code { overflow-wrap: anywhere; }
+  .container p, .container dd, .container li, .container span { overflow-wrap: anywhere; } }

@@ -1,0 +1,113 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<p>The Provenance of Biological Material Ontology (PBM-O) is the OWL&nbsp;2 representation of the
+<em>Provenance of Biological Material</em> (PBM) structures. The PBM structures are specializations of the
+provenance structures defined in W3C PROV-DM and describe biological material, such as samples, their containers,
+sources, and standard operating procedures, together with the activities performed on them and the devices involved.
+They are used together with the Common Provenance Model (CPM), whose terms are defined in
+<a href="/ns/cpm/">CPM-O</a>.</p>
+
+<p>Provenance of samples and derived data answers questions such as which aliquots were in a freezer during a
+temperature excursion, or how long it took from blood draw to centrifugation.</p>
+
+<p>The primary purpose of PBM-O is to provide stable IRIs, labels, and definitions for the PBM terms, so that
+they can be referenced from provenance documents in PROV-N, PROV-JSON, PROV-XML, or RDF. PBM-O extends the
+W3C PROV Ontology (PROV-O), which it imports: every PBM class is a subclass of a PROV-O class.</p>
+
+<h3 id="intro-structures" class="list">PBM structures</h3>
+
+<p>Each structure is identified in PROV-N and PROV-JSON by a value of the <code>prov:type</code> attribute. In PBM-O
+each type value corresponds to a class (see <a href="#intro-usage">Using PBM terms</a>).</p>
+
+<table class="table">
+  <thead>
+    <tr><th>Class</th><th><code>prov:type</code> value</th><th>Subclass of</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>pbm:Sample</code></td><td><code>pbm:sample</code></td><td><code>prov:Entity</code></td><td>a provenance structure that represents a sample.</td></tr>
+    <tr><td><code>pbm:Container</code></td><td><code>pbm:container</code></td><td><code>prov:Collection</code></td><td>a provenance structure that represents a container.</td></tr>
+    <tr><td><code>pbm:SOP</code></td><td><code>pbm:sop</code></td><td><code>prov:Plan</code></td><td>a provenance structure that represents a standard operating procedure.</td></tr>
+    <tr><td><code>pbm:Source</code></td><td><code>pbm:source</code></td><td><code>prov:Entity</code></td><td>a provenance structure that represents a source of a sample.</td></tr>
+    <tr><td><code>pbm:Acquisition</code></td><td><code>pbm:acquisition</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the acquisition of a sample.</td></tr>
+    <tr><td><code>pbm:Transport</code></td><td><code>pbm:transport</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the transport of a sample.</td></tr>
+    <tr><td><code>pbm:Reception</code></td><td><code>pbm:reception</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the reception of a sample.</td></tr>
+    <tr><td><code>pbm:Processing</code></td><td><code>pbm:processing</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the processing of a sample.</td></tr>
+    <tr><td><code>pbm:Storage</code></td><td><code>pbm:storage</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the storage of a sample.</td></tr>
+    <tr><td><code>pbm:Retrieval</code></td><td><code>pbm:retrieval</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the retrieval of a sample from sample storage.</td></tr>
+    <tr><td><code>pbm:Distribution</code></td><td><code>pbm:distribution</code></td><td><code>prov:Activity</code></td><td>a provenance structure that represents the distribution or disposal of a sample.</td></tr>
+    <tr><td><code>pbm:StorageDevice</code></td><td><code>pbm:storageDevice</code></td><td><code>prov:Agent</code></td><td>a provenance structure that represents a device for sample storage.</td></tr>
+    <tr><td><code>pbm:ProcessingDevice</code></td><td><code>pbm:processingDevice</code></td><td><code>prov:Agent</code></td><td>a provenance structure that represents a device for sample processing.</td></tr>
+  </tbody>
+</table>
+
+<h3 id="intro-usage" class="list">Using PBM terms</h3>
+
+<p>The following PROV-N example shows a sample that is stored in a storage device. Entities are snapshots of
+described objects: the sample before storage (<code>ex:sample1</code>) and the stored sample
+(<code>ex:sample1-stored</code>) are separate entities, both of type <code>pbm:sample</code>. The storage activity
+uses the first and generates the second. All identifiers and values are illustrative.</p>
+
+<pre>
+document
+  prefix ex &lt;https://example.org/&gt;
+  prefix pbm &lt;https://www.commonprovenancemodel.org/ns/pbm#&gt;
+
+  entity(ex:sample1, [prov:type='pbm:sample'])
+  entity(ex:sample1-stored, [prov:type='pbm:sample'])
+  entity(ex:box1, [prov:type='prov:Collection', prov:type='pbm:container'])
+  activity(ex:storage1, 2026-09-01T10:00:00Z, -, [prov:type='pbm:storage'])
+  agent(ex:freezer1, [prov:type='pbm:storageDevice'])
+  used(ex:storage1, ex:sample1, -)
+  wasGeneratedBy(ex:sample1-stored, ex:storage1, -)
+  wasDerivedFrom(ex:sample1-stored, ex:sample1)
+  wasAssociatedWith(ex:storage1, ex:freezer1, -)
+  hadMember(ex:box1, ex:sample1-stored)
+endDocument
+</pre>
+
+<p>Following PROV-O, the <code>prov:type</code> attribute is expressed in RDF with <code>rdf:type</code>.
+Standard PROV tools therefore produce the following RDF from the example above (excerpt):</p>
+
+<pre>
+ex:sample1 a prov:Entity, pbm:sample .
+
+ex:sample1-stored a prov:Entity, pbm:sample ;
+    prov:wasGeneratedBy ex:storage1 ;
+    prov:wasDerivedFrom ex:sample1 .
+
+ex:box1 a prov:Entity, prov:Collection, pbm:container ;
+    prov:hadMember ex:sample1-stored .
+
+ex:storage1 a prov:Activity, pbm:storage ;
+    prov:startedAtTime "2026-09-01T10:00:00Z"^^xsd:dateTime ;
+    prov:used ex:sample1 ;
+    prov:wasAssociatedWith ex:freezer1 .
+
+ex:freezer1 a prov:Agent, pbm:storageDevice .
+</pre>
+
+<p>A larger example combining PBM-O with CPM-O across organisations is on the <a href="/examples/">Examples</a> page.</p>
+
+<p>Please note:</p>
+<ul>
+  <li><strong>Type values and classes.</strong> The PBM structures use lower-case type values
+    (e.g. <code>pbm:sample</code>), while PBM-O names its classes with a capital letter (e.g. <code>pbm:Sample</code>).
+    As in CPM-O, each type value is declared as a class equivalent to the corresponding PBM-O class, so RDF produced
+    from PROV-N or PROV-JSON is classified correctly.</li>
+  <li><strong>Containers.</strong> A container carries two type values, <code>prov:Collection</code> and
+    <code>pbm:container</code>.</li>
+</ul>
+
+<h3 id="intro-scope" class="list">Scope of this version</h3>
+
+<p>In this version, PBM-O serves primarily as a vocabulary: it declares the PBM classes, provides
+their definitions, and aligns them with PROV-O. The minimum cardinality restrictions document the mandatory start
+and end times of the PBM activities but, under the open-world semantics of OWL, they do not validate data.
+Constraints for checking conformance and further features are planned for future versions.</p>
+
+<h3 id="intro-issues" class="list">Known issues and feedback</h3>
+
+<p>Known defects of this version and their workarounds are listed on the
+<a href="/ontologies/known-issues/">known issues</a> page.
+The development of the Common Provenance Framework takes place at
+<a href="https://github.com/Common-Provenance-Framework">https://github.com/Common-Provenance-Framework</a>.</p>

@@ -1,0 +1,154 @@
+/* Common Provenance Model website: shared style of the hand-written pages.
+   The navigation bar (src/partials/nav.html) and the footer (src/partials/footer.html) carry their own styles,
+   so that they look the same on the WIDOCO ontology pages (themed by assets/widoco-theme.css). */
+@import url("fonts.css");
+
+:root {
+  --brand: #1f3a5f;          /* navy: headings, brand */
+  --accent: #e8742a;         /* orange: active navigation, buttons, highlights */
+  --accent-deep: #b9561a;
+  --link: #1d5fa6;
+  --ink: #1c2530;            /* text */
+  --ink-2: #4a5562;          /* secondary text */
+  --ink-3: #6b7682;          /* captions, meta */
+  --rule: #e3e6ea;
+  --rule-strong: #c9ced4;
+  --wash: #f5f7f9;
+  --paper: #ffffff;
+  --radius: 4px;
+  --shell: 76rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --font-display: "Overpass", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--paper); }
+
+/* ---------- layout ---------- */
+body > main { flex: 1 0 auto; width: 100%; }
+.page { max-width: var(--shell); margin: 0 auto; padding: 2.5rem var(--gutter) 4rem; }
+.page > * { max-width: 52rem; }
+.page > figure, .page > table, .page > .cards, .page > .logos { max-width: none; }
+/* pages with an on-page table of contents: <main class="page page--toc"><div class="content">…</div><aside class="toc"></aside></main> */
+.page--toc { display: grid; grid-template-columns: minmax(0, 1fr) 14rem; gap: 3rem; align-items: start; }
+.page--toc > * { max-width: none; }
+.content > p, .content > ul, .content > ol, .content > dl, .content > h1, .content > h2, .content > h3 { max-width: 48rem; }
+.toc { position: sticky; top: 5.5rem; font-family: var(--font-display); font-size: 0.875rem; line-height: 1.4;
+       border-left: 1px solid var(--rule); padding-left: 1rem; max-height: calc(100vh - 7rem); overflow-y: auto; }
+.toc:empty { display: none; }
+.toc .toc-title { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; color: var(--ink-3); margin: 0 0 0.6rem; }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0; }
+.toc a { display: block; padding: 0.25rem 0; color: var(--ink-2); text-decoration: none; }
+.toc a:hover { color: var(--brand); }
+.toc a.active { color: var(--brand); font-weight: 700; }
+.toc ol ol { padding-left: 0.9rem; }
+.toc ol ol a { font-size: 0.8125rem; color: var(--ink-3); }
+@media (max-width: 64rem) {
+  .page--toc { display: block; }
+  .toc { display: none; }
+}
+
+/* ---------- typography ---------- */
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--brand); line-height: 1.2; }
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; margin: 3rem 0 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.2rem; font-weight: 700; margin: 2rem 0 0.5rem; }
+h4 { font-size: 1rem; font-weight: 700; margin: 1.5rem 0 0.4rem; }
+.content > h2:first-child, .page > h2:first-child { border-top: 0; margin-top: 0; }
+p, ul, ol, dl { margin: 0 0 1rem; }
+li { margin: 0.2rem 0; }
+.lead { font-size: 1.2rem; line-height: 1.6; color: var(--ink-2); }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-deep); }
+strong { font-weight: 700; }
+code { font-family: var(--font-mono); font-size: 0.875em; background: var(--wash); border: 1px solid var(--rule); padding: 0.05em 0.3em; border-radius: 3px; }
+pre { font-family: var(--font-mono); font-size: 0.875rem; background: var(--wash); border: 1px solid var(--rule); border-radius: var(--radius); padding: 0.9rem 1rem; overflow-x: auto; line-height: 1.5; }
+pre code { background: none; border: 0; padding: 0; }
+.todo { background: #fff4ce; border: 1px dashed #e0c36a; padding: 0.1em 0.35em; border-radius: 3px; }
+
+/* ---------- version box at the top of the specification ---------- */
+.spec-meta { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0.4rem 1.25rem; margin: 1.5rem 0 2rem;
+             padding: 1rem 1.25rem; background: var(--wash); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 0.95rem; }
+.spec-meta dt { font-family: var(--font-display); font-weight: 700; color: var(--ink-2); }
+.spec-meta dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 36rem) { .spec-meta { grid-template-columns: 1fr; } .spec-meta dd { margin-bottom: 0.5rem; } }
+
+/* ---------- tables ---------- */
+table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+th, td { border-bottom: 1px solid var(--rule); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; color: var(--ink); background: var(--wash); border-bottom: 2px solid var(--rule-strong); }
+td:first-child { white-space: nowrap; }
+/* narrow screens: wide tables scroll horizontally instead of widening the page */
+@media (max-width: 48rem) {
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  code { overflow-wrap: anywhere; }
+  table code { overflow-wrap: normal; white-space: nowrap; }
+  table td { min-width: 8rem; } table td:first-child { min-width: 0; }
+  .attrs td:nth-child(3) { min-width: 15rem; }
+}
+/* attribute tables of the specification: same column widths in every table */
+.attrs { table-layout: fixed; }
+.attrs thead th:nth-child(1) { width: 16rem; } .attrs thead th:nth-child(2) { width: 14.5rem; }
+.attrs td { overflow-wrap: anywhere; }
+.attrs code { font-size: 0.8em; }
+.attrs .attrs-group th { background: none; border-bottom: 1px solid var(--rule-strong); padding-top: 0.9rem; font-size: 0.8rem;
+                         text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-3); }
+
+/* ---------- figures ---------- */
+figure { margin: 1.75rem 0 2.25rem; }
+figure img { display: block; margin: 0 auto; height: auto; }
+figcaption { margin: 0.75rem auto 0; max-width: 46rem; text-align: center; font-size: 0.875rem; line-height: 1.5; color: var(--ink-3); }
+
+/* ---------- definition lists (terminology, site overview) ---------- */
+.terms { margin: 1rem 0 1.5rem; }
+.terms dt { font-family: var(--font-display); font-weight: 700; color: var(--ink); margin-top: 1rem; }
+.terms dd { margin: 0.15rem 0 0; color: var(--ink-2); }
+
+/* ---------- landing page ---------- */
+.hero { padding: 1.5rem 0 1rem; max-width: 50rem; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.75rem); letter-spacing: -0.03em; line-height: 1.05; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0; }
+.button { display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; text-decoration: none;
+          padding: 0.7rem 1.2rem; border-radius: var(--radius); border: 2px solid var(--accent); background: var(--accent); color: #fff; }
+.button:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+.button--ghost { background: transparent; color: var(--brand); border-color: var(--rule-strong); }
+.button--ghost:hover { background: var(--wash); color: var(--brand); border-color: var(--brand); }
+
+/* ---------- landing page: three key messages below the hero ---------- */
+.page > .highlights { max-width: none; }
+.highlights { list-style: none; padding: 0; margin: 2.5rem 0 1rem; display: grid; gap: 1rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 64rem) { .highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 36rem) { .highlights { grid-template-columns: 1fr; } }
+.highlights li { margin: 0; padding: 1.1rem 1.25rem; background: var(--wash); border-top: 3px solid var(--accent); border-radius: var(--radius); }
+.highlights strong { display: block; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.3; color: var(--brand); margin-bottom: 0.35rem; }
+.highlights strong a { color: inherit; text-decoration-color: var(--accent); }
+.highlights span { display: block; font-size: 0.95rem; line-height: 1.5; color: var(--ink-2); }
+
+/* ---------- cards ---------- */
+.cards { list-style: none; padding: 0; margin: 2rem 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.cards li { margin: 0; }
+.card { display: block; height: 100%; padding: 1.1rem 1.2rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
+        text-decoration: none; color: var(--ink); transition: border-color 0.15s, box-shadow 0.15s; }
+.card:hover { border-color: var(--accent); box-shadow: 0 4px 14px rgba(28, 37, 48, 0.08); color: var(--ink); }
+.card strong { display: block; font-family: var(--font-display); font-size: 1.1rem; color: var(--brand); margin-bottom: 0.3rem; }
+.card span { display: block; font-size: 0.95rem; color: var(--ink-2); line-height: 1.5; }
+
+/* ---------- acknowledgement logos ---------- */
+.logos { list-style: none; padding: 0; margin: 1rem 0 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1rem; }
+.logos li { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; gap: 0.6rem; margin: 0;
+            padding: 1.1rem 1rem; border: 1px solid var(--rule); border-radius: var(--radius); font-size: 0.9rem; color: var(--ink-2); }
+.logos img { max-width: 100%; height: 4rem; object-fit: contain; }
+
+/* EU emblem with "Funded by the European Union" (about page, after the project logos) */
+.page > .eu-ack { max-width: none; }
+.eu-ack { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 1.5rem 0 2rem; }
+.eu-ack .eu-emblem { width: 3rem; height: 2rem; flex: none; }
+.eu-ack p { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--ink); }
+
+/* ---------- skip link ---------- */
+.skip-link { position: absolute; left: -999px; top: 0.5rem; z-index: 2000; background: var(--brand); color: #fff; padding: 0.5rem 0.9rem; border-radius: var(--radius); }
+.skip-link:focus { left: 0.5rem; }
